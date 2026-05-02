@@ -247,6 +247,38 @@ region = Rect2(106, 0, 106, 84)
 atlas = ExtResource("9_uf5tr")
 region = Rect2(212, 0, 106, 84)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(0, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je7p5"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(106, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(212, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(318, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(424, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(530, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(636, 0, 106, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
+atlas = ExtResource("10_lgqa7")
+region = Rect2(742, 0, 106, 84)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_d88dk"]
 atlas = ExtResource("10_lgqa7")
 region = Rect2(0, 0, 106, 84)
@@ -505,6 +537,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h17s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je7p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm80t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugbui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcs02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myrg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvlxm")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d88dk")
 }, {
 "duration": 1.0,
@@ -537,5 +598,4 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=879886189]
 sprite_frames = SubResource("SpriteFrames_5od4l")
-animation = &"attack3"
-frame_progress = 0.8574644
+animation = &"new_animation"
