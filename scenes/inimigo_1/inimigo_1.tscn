@@ -298,10 +298,11 @@ animations = [{
 size = Vector2(84, 92)
 
 [node name="Inimigo 1" type="CharacterBody2D" unique_id=2142985082]
+collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1043108918]
 sprite_frames = SubResource("SpriteFrames_v1rm6")
-animation = &"death"
+animation = &"attack1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1341232514]
 position = Vector2(-1, 0)
