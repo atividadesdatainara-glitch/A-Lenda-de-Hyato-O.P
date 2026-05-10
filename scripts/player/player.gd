@@ -8,7 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
 var is_dashing = false
 var is_taking_damage = false 
-var pode_dar_dash = true # NOVA VARIÁVEL
+var pode_dar_dash = true 
 var combo_count = 0 
 var player_health = 3 
 var player_is_dead = false
@@ -38,7 +38,6 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_W) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# MUDANÇA: Agora verifica se pode_dar_dash
 	if Input.is_key_pressed(KEY_L):
 		if not is_dashing and pode_dar_dash:
 			executar_dash()
@@ -87,7 +86,7 @@ func executar_ataque(anim_name):
 	await espera_frame_player(2, anim_name)
 	
 	if is_attacking and not is_taking_damage:
-		var inimigos = get_tree().get_nodes_in_group("inimigos")
+		var inimigos = get_tree().get_nodes_in_group("inimigos") + get_tree().get_nodes_in_group("boss")
 		for inimigo in inimigos:
 			var dist_x = abs(global_position.x - inimigo.global_position.x)
 			var looking_right = not sprite.flip_h
@@ -107,41 +106,31 @@ func espera_frame_player(frame_alvo, anim_atual):
 
 func executar_dash():
 	is_dashing = true
-	pode_dar_dash = false # Bloqueia novos dashes
-	
+	pode_dar_dash = false
 	set_collision_layer_value(1, false) 
 	var original_mask = collision_mask
 	collision_mask = 1 
-	
 	sprite.modulate.a = 0.5
 	sprite.play("dash")
 	var dash_dir = -1 if sprite.flip_h else 1
 	velocity.x = dash_dir * DASH_SPEED
 	velocity.y = 0 
-	
 	await get_tree().create_timer(0.2).timeout
-	
 	set_collision_layer_value(1, true)
 	collision_mask = original_mask
 	sprite.modulate.a = 1.0
 	is_dashing = false
-	
-	# COOLDOWN DE 3 SEGUNDOS
 	await get_tree().create_timer(3.0).timeout
-	pode_dar_dash = true
-	print("Dash pronto novamente!")
 
 func levar_dano_do_inimigo():
 	if player_is_dead or is_dashing or is_taking_damage: return
 	player_health -= 1
 	is_taking_damage = true 
 	is_attacking = false 
-	
 	if player_health <= 0:
 		player_morrer()
 	else:
 		if sprite.sprite_frames.has_animation("hurt"):
-			sprite.stop()
 			sprite.play("hurt")
 			var knockback_dir = 1 if sprite.flip_h else -1
 			velocity.x = knockback_dir * 150
@@ -152,7 +141,4 @@ func levar_dano_do_inimigo():
 func player_morrer():
 	player_is_dead = true
 	velocity = Vector2.ZERO
-	if sprite.sprite_frames.has_animation("death"):
-		sprite.play("death")
-	else:
-		sprite.stop()
+	sprite.play("death")

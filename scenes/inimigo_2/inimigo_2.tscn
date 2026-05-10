@@ -347,9 +347,11 @@ size = Vector2(103, 114)
 collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1217756846]
+position = Vector2(-144, -163)
 sprite_frames = SubResource("SpriteFrames_uo6gs")
-animation = &"hurt"
+animation = &"idle"
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1569718059]
-position = Vector2(-1.5, 27)
+position = Vector2(-1, -59)
 shape = SubResource("RectangleShape2D_7niul")
