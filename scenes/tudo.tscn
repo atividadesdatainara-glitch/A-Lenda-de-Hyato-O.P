@@ -16,16 +16,17 @@
 script = SubResource("GDScript_d4yxq")
 
 [node name="Boss" parent="." unique_id=476643638 groups=["boss"] instance=ExtResource("1_82j8m")]
-position = Vector2(872, 265)
+position = Vector2(1026, 283)
 collision_layer = 2
 script = ExtResource("2_4gq5b")
 
 [node name="Inimigo 1" parent="." unique_id=2142985082 groups=["inimigos"] instance=ExtResource("2_h3m6f")]
-position = Vector2(806, 256)
+position = Vector2(951, 262)
 script = ExtResource("4_fonqh")
 
 [node name="Inimigo 2" parent="." unique_id=1636653877 groups=["inimigos"] instance=ExtResource("3_fonqh")]
-position = Vector2(805, 306)
+visible = true
+position = Vector2(950, 310)
 script = ExtResource("6_4gq5b")
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("4_f0mxy")]
