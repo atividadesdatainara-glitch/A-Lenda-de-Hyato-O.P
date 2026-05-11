@@ -66,7 +66,7 @@ func executar_ataque_inimigo():
 		await sprite.animation_finished
 		
 	is_attacking = false
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	pode_atacar = true
 
 func espera_frame_especifico(frame_alvo):

@@ -22,7 +22,7 @@ const COOLDOWN_ARCO = 1.5            # Ciclo de Pressão Aérea
 const SPEED_AVANCO = 340.0           # Avanço Rápido: dobro da velocidade normal
 const TEMPO_PARADO_REATIVO = 1.0     # Ataque Reativo: tempo que player fica parado
 
-var health = 10
+var health = 50
 var is_dead = false
 var is_attacking = false
 var is_taking_damage = false
@@ -246,7 +246,7 @@ func _estado_flutuando(delta):
 # --- Escolha de padrão de ataque ---
 func _escolher_ataque():
 	# Pressão por HP: abaixo de 5 HP, força ataque rápido sempre
-	if health <= 5:
+	if health <= 20:
 		_executar_ataque_pressao()
 		return
 
@@ -255,7 +255,7 @@ func _escolher_ataque():
 	opcoes.erase(ultimo_ataque)  # remove o último usado pra não repetir
 
 	# Triplo só abaixo de 3 HP
-	if health > 3:
+	if health > 10:
 		opcoes.erase("triplo")
 
 	var escolha = opcoes[randi() % opcoes.size()]
