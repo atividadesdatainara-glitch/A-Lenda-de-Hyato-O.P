@@ -14,7 +14,6 @@ var pode_atacar = true
 
 func _ready():
 	add_to_group("inimigos")
-	is_emerging = true
 	if sprite.sprite_frames.has_animation("emerging"):
 		sprite.play("emerging")
 		await sprite.animation_finished
@@ -23,16 +22,14 @@ func _ready():
 func _physics_process(delta):
 	if is_dead: return 
 	
-	# Enquanto estiver "nascendo", fica parado onde você o deixou na cena
 	if is_emerging:
 		velocity = Vector2.ZERO
-		return 
-
-	# Gravidade só inicia após o emerging
+		move_and_slide()
+		return
+	
 	if not is_on_floor(): 
 		velocity.y += 980 * delta
 		
-	# Trava de movimento durante dano ou ataque
 	if is_taking_damage or is_attacking:
 		velocity.x = 0
 		move_and_slide()
@@ -61,7 +58,7 @@ func executar_ataque_inimigo():
 	
 	await espera_frame_especifico(9) 
 	
-	if player and not is_dead and is_attacking:
+	if is_instance_valid(player) and not is_dead and is_attacking:
 		if global_position.distance_to(player.global_position) <= ATTACK_RANGE + 30:
 			player.levar_dano_do_inimigo()
 			
@@ -100,7 +97,7 @@ func morrer():
 	
 	set_physics_process(false) 
 	$CollisionShape2D.set_deferred("disabled", true)
-	
+	sprite.modulate = Color(1, 1, 1) # Reseta cor caso morra durante flash
 	sprite.play("death")
 	await sprite.animation_finished
 	queue_free()

@@ -14,18 +14,23 @@ var pode_atacar = true
 
 func _ready():
 	add_to_group("inimigos")
-	is_emerging = true
 	sprite.play("emerging")
 	await sprite.animation_finished
 	is_emerging = false
 
 func _physics_process(delta):
 	if is_dead: return 
+	
+	# MELHORIA: trava explícita durante emerging, igual ao Inimigo2
+	if is_emerging:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 		
 	if not is_on_floor(): 
 		velocity.y += 980 * delta
 		
-	if is_emerging or is_taking_damage or is_attacking:
+	if is_taking_damage or is_attacking:
 		velocity.x = 0
 		move_and_slide()
 		return
@@ -51,7 +56,7 @@ func executar_ataque_inimigo():
 	pode_atacar = false 
 	sprite.play("attack1")
 	await espera_frame_especifico(6) 
-	if player and not is_dead and is_attacking:
+	if is_instance_valid(player) and not is_dead and is_attacking:
 		if global_position.distance_to(player.global_position) <= ATTACK_RANGE + 15:
 			player.levar_dano_do_inimigo()
 	if sprite.animation == "attack1":
@@ -67,6 +72,7 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead or is_emerging: return
 	health -= 1
+	
 	if health <= 0:
 		morrer()
 		return
@@ -87,17 +93,13 @@ func morrer():
 	
 	set_physics_process(false) 
 	$CollisionShape2D.set_deferred("disabled", true)
-	
+	sprite.modulate = Color(1, 1, 1) # Reseta cor caso morra durante flash
 	sprite.play("death")
 	await sprite.animation_finished
 	
-	# Procura o Inimigo 2 na cena
 	var boss = get_parent().get_node_or_null("Inimigo 2")
-	
 	if boss:
-		# Removida a linha que alterava a posição para respeitar o editor
 		boss.visible = true
 		boss.process_mode = Node.PROCESS_MODE_INHERIT
-		print("Inimigo 2 despertado na posição original!")
 	
 	queue_free()
