@@ -8,49 +8,28 @@ var is_emerging = true
 var is_attacking = false
 var is_taking_damage = false 
 var pode_atacar = true 
-var hits_recebidos_seguidos = 0
-var posicao_spawn : Vector2 
-
-@export var inimigo2_scene : PackedScene 
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player = get_tree().current_scene.find_child("Player", true, false)
 
 func _ready():
 	add_to_group("inimigos")
-	posicao_spawn = global_position # Salva de onde ele veio
-	
 	is_emerging = true
 	sprite.play("emerging")
 	await sprite.animation_finished
 	is_emerging = false
 
 func _physics_process(delta):
-	# SOLUÇÃO VOID: Se estiver morto, cancela TUDO. Ele congela no lugar.
-	if is_dead: 
-		return 
+	if is_dead: return 
 		
-	# Gravidade sempre aplica se não estiver no chão
 	if not is_on_floor(): 
 		velocity.y += 980 * delta
 		
-	# Se estiver surgindo, fica parado no X, mas a gravidade (Y) funciona!
-	if is_emerging:
-		velocity.x = 0
-		move_and_slide()
-		return
-		
-	if is_taking_damage and not is_attacking:
+	if is_emerging or is_taking_damage or is_attacking:
 		velocity.x = 0
 		move_and_slide()
 		return
 
-	if is_attacking:
-		velocity.x = 0
-		move_and_slide()
-		return
-
-	# Lógica normal
 	if player:
 		var dist = global_position.distance_to(player.global_position)
 		var direction = sign(player.global_position.x - global_position.x)
@@ -88,21 +67,19 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead or is_emerging: return
 	health -= 1
-	hits_recebidos_seguidos += 1
-	
 	if health <= 0:
 		morrer()
 		return
 		
-	if is_attacking:
-		sprite.modulate = Color(10, 10, 10) 
-		await get_tree().create_timer(0.08).timeout
-		sprite.modulate = Color(1, 1, 1)
-	else:
+	if not is_attacking:
 		is_taking_damage = true
 		sprite.play("hurt")
 		await sprite.animation_finished
 		is_taking_damage = false 
+	else:
+		sprite.modulate = Color(10, 10, 10) 
+		await get_tree().create_timer(0.08).timeout
+		sprite.modulate = Color(1, 1, 1)
 
 func morrer():
 	if is_dead: return
@@ -114,7 +91,13 @@ func morrer():
 	sprite.play("death")
 	await sprite.animation_finished
 	
-	# Avisa ao Autoload: "Opa, morri aqui nesta posição!"
-	GameEvents.emit_signal("spawn_inimigo2", global_position)
+	# Procura o Inimigo 2 na cena
+	var boss = get_parent().get_node_or_null("Inimigo 2")
+	
+	if boss:
+		# Removida a linha que alterava a posição para respeitar o editor
+		boss.visible = true
+		boss.process_mode = Node.PROCESS_MODE_INHERIT
+		print("Inimigo 2 despertado na posição original!")
 	
 	queue_free()

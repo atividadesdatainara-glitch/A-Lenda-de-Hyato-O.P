@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dg062kvb37vpk"]
 
-[ext_resource type="Script" uid="uid://ddcv8a2nf52wk" path="res://scripts/tudo.gd" id="1_4gq5b"]
 [ext_resource type="PackedScene" uid="uid://cxnihteohm2a6" path="res://scenes/boss/boss.tscn" id="1_82j8m"]
 [ext_resource type="Script" uid="uid://csdlxmfavelh" path="res://scripts/boss/boss.gd" id="2_4gq5b"]
 [ext_resource type="PackedScene" uid="uid://c06bvxg64i2n0" path="res://scenes/inimigo_1/inimigo_1.tscn" id="2_h3m6f"]
@@ -9,10 +8,12 @@
 [ext_resource type="Script" uid="uid://c58uvj1tyg5u1" path="res://scripts/inimigo_1/inimigo_1.gd" id="4_fonqh"]
 [ext_resource type="PackedScene" uid="uid://bcgo152luwj23" path="res://scenes/chão_teste/chão.tscn" id="5_4gq5b"]
 [ext_resource type="Script" uid="uid://vlal0nakrrp2" path="res://scripts/player/player.gd" id="5_h3m6f"]
+[ext_resource type="Script" uid="uid://c5iguddqi2q0i" path="res://scripts/inimigo_2/inimigo_2.gd" id="6_4gq5b"]
+
+[sub_resource type="GDScript" id="GDScript_d4yxq"]
 
 [node name="Tudo" type="Node2D" unique_id=1115703280]
-script = ExtResource("1_4gq5b")
-inimigo2_scene = ExtResource("3_fonqh")
+script = SubResource("GDScript_d4yxq")
 
 [node name="Boss" parent="." unique_id=476643638 groups=["boss"] instance=ExtResource("1_82j8m")]
 position = Vector2(872, 265)
@@ -20,9 +21,12 @@ collision_layer = 2
 script = ExtResource("2_4gq5b")
 
 [node name="Inimigo 1" parent="." unique_id=2142985082 groups=["inimigos"] instance=ExtResource("2_h3m6f")]
-position = Vector2(769, 254)
+position = Vector2(806, 256)
 script = ExtResource("4_fonqh")
-inimigo2_scene = ExtResource("3_fonqh")
+
+[node name="Inimigo 2" parent="." unique_id=1636653877 groups=["inimigos"] instance=ExtResource("3_fonqh")]
+position = Vector2(805, 306)
+script = ExtResource("6_4gq5b")
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("4_f0mxy")]
 position = Vector2(236, 260)

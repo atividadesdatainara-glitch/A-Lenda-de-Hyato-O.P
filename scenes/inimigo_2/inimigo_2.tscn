@@ -344,6 +344,8 @@ animations = [{
 size = Vector2(103, 114)
 
 [node name="Inimigo 2" type="CharacterBody2D" unique_id=1636653877]
+process_mode = 4
+visible = false
 collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1217756846]
