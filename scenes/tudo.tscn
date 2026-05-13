@@ -3,12 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://cxnihteohm2a6" path="res://scenes/boss/boss.tscn" id="1_82j8m"]
 [ext_resource type="Script" uid="uid://csdlxmfavelh" path="res://scripts/boss/boss.gd" id="2_4gq5b"]
 [ext_resource type="PackedScene" uid="uid://c06bvxg64i2n0" path="res://scenes/inimigo_1/inimigo_1.tscn" id="2_h3m6f"]
+[ext_resource type="PackedScene" uid="uid://ctyhspteethhk" path="res://scenes/lifebar/lifebar.tscn" id="3_d4yxq"]
 [ext_resource type="PackedScene" uid="uid://v756vbboohf1" path="res://scenes/inimigo_2/inimigo_2.tscn" id="3_fonqh"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://scenes/player/player.tscn" id="4_f0mxy"]
 [ext_resource type="Script" uid="uid://c58uvj1tyg5u1" path="res://scripts/inimigo_1/inimigo_1.gd" id="4_fonqh"]
+[ext_resource type="PackedScene" uid="uid://cscspg0xgdyri" path="res://scenes/icones/icon___boss.tscn" id="4_pbabx"]
 [ext_resource type="PackedScene" uid="uid://bcgo152luwj23" path="res://scenes/chão_teste/chão.tscn" id="5_4gq5b"]
 [ext_resource type="Script" uid="uid://vlal0nakrrp2" path="res://scripts/player/player.gd" id="5_h3m6f"]
 [ext_resource type="Script" uid="uid://c5iguddqi2q0i" path="res://scripts/inimigo_2/inimigo_2.gd" id="6_4gq5b"]
+[ext_resource type="PackedScene" uid="uid://0tiqb1rtilgj" path="res://scenes/icones/icon___inimigo_1.tscn" id="7_78klr"]
 
 [sub_resource type="GDScript" id="GDScript_d4yxq"]
 
@@ -20,19 +23,41 @@ position = Vector2(1026, 283)
 collision_layer = 2
 script = ExtResource("2_4gq5b")
 
+[node name="lifebar" parent="Boss" unique_id=1288583847 instance=ExtResource("3_d4yxq")]
+position = Vector2(1.5258789e-05, -45)
+scale = Vector2(0.4140626, 0.44531256)
+
+[node name="Icon - Boss" parent="Boss" unique_id=1537997583 instance=ExtResource("4_pbabx")]
+position = Vector2(-44.000023, -45)
+scale = Vector2(0.04607506, 0.04761904)
+
 [node name="Inimigo 1" parent="." unique_id=2142985082 groups=["inimigos"] instance=ExtResource("2_h3m6f")]
-position = Vector2(951, 262)
+position = Vector2(1124, 242)
 script = ExtResource("4_fonqh")
 
+[node name="lifebar" parent="Inimigo 1" unique_id=1817025129 instance=ExtResource("3_d4yxq")]
+position = Vector2(-1.9999962, -61)
+scale = Vector2(0.41145834, 0.46875)
+
+[node name="Icon - Inimigo 1" parent="Inimigo 1" unique_id=1359709204 instance=ExtResource("7_78klr")]
+position = Vector2(-46.999992, -59.999996)
+scale = Vector2(0.049488034, 0.048701324)
+
 [node name="Inimigo 2" parent="." unique_id=1636653877 groups=["inimigos"] instance=ExtResource("3_fonqh")]
-visible = true
-position = Vector2(950, 310)
+position = Vector2(952, 306)
 script = ExtResource("6_4gq5b")
+
+[node name="lifebar" parent="Inimigo 2" unique_id=1414761460 instance=ExtResource("3_d4yxq")]
+position = Vector2(103, -269)
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("4_f0mxy")]
 position = Vector2(236, 260)
 collision_mask = 3
 script = ExtResource("5_h3m6f")
+
+[node name="lifebar" parent="Player" unique_id=69478103 instance=ExtResource("3_d4yxq")]
+position = Vector2(-1.0000067, -14.999996)
+scale = Vector2(0.26302093, 0.37500012)
 
 [node name="Chão" parent="." unique_id=911201061 instance=ExtResource("5_4gq5b")]
 position = Vector2(46, 307)

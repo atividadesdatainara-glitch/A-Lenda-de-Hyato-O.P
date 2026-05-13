@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cscspg0xgdyri"]
+
+[ext_resource type="Texture2D" uid="uid://boxiwwihdvn6o" path="res://scenes/icones/boss.png" id="1_hrkif"]
+
+[node name="Icon - Boss" type="Sprite2D" unique_id=1537997583]
+texture = ExtResource("1_hrkif")
