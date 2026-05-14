@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctyhspteethhk"]
 
 [ext_resource type="Texture2D" uid="uid://co2y56uwjjkpw" path="res://scenes/lifebar/lifebar.png" id="1_44j72"]
+[ext_resource type="Script" uid="uid://dcvsu8i3hvij8" path="res://scripts/lifebar/lifebar.gd" id="2_iv0i0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iv0i0"]
 atlas = ExtResource("1_44j72")
@@ -90,3 +91,4 @@ animations = [{
 [node name="lifebar" type="AnimatedSprite2D" unique_id=1288583847]
 sprite_frames = SubResource("SpriteFrames_o5v66")
 animation = &"lifebar"
+script = ExtResource("2_iv0i0")

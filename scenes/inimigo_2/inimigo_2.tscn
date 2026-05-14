@@ -111,7 +111,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack1",
-"speed": 9.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -345,13 +345,12 @@ size = Vector2(103, 114)
 
 [node name="Inimigo 2" type="CharacterBody2D" unique_id=1636653877]
 process_mode = 4
-visible = false
 collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1217756846]
 position = Vector2(-144, -163)
 sprite_frames = SubResource("SpriteFrames_uo6gs")
-animation = &"idle"
+animation = &"attack1"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1569718059]

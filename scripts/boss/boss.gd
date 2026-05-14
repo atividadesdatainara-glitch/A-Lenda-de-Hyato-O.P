@@ -51,6 +51,7 @@ var timer_modo = 0.0
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player = get_tree().current_scene.find_child("Player", true, false)
+@onready var barra = $lifebar
 
 func _ready():
 	add_to_group("boss")
@@ -611,6 +612,7 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead: return
 	health -= 1
+	barra.atualizar_barra(health, 50)
 
 	if health <= 0:
 		morrer()

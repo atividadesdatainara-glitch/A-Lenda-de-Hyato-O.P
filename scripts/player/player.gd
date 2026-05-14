@@ -21,6 +21,7 @@ var player_is_dead = false
 var boss_hit_count = 0
 
 @onready var sprite = $AnimatedSprite2D
+@onready var barra = $lifebar
 
 func _physics_process(delta):
 	if player_is_dead: return
@@ -168,10 +169,13 @@ func espera_frame_player(frame_alvo, anim_atual):
 		await get_tree().process_frame
 
 # Chamado por inimigos comuns
+# Função principal de dano (Inimigo)
 func levar_dano_do_inimigo():
 	if player_is_dead or is_dashing or is_taking_damage: return
 	
 	player_health -= 1
+	barra.atualizar_barra(player_health, 10) # Atualiza a barra de vida
+	
 	is_taking_damage = true 
 	is_attacking = false 
 	is_dashing = false
@@ -184,29 +188,16 @@ func levar_dano_do_inimigo():
 	var knockback_dir = 1 if sprite.flip_h else -1
 	velocity.x = knockback_dir * 300 
 	velocity.y = -100 
-	await sprite.animation_finished
+	
+	# Aguarda a animação de sofrer dano acabar
+	if sprite.animation == "hurt":
+		await sprite.animation_finished
+	
 	is_taking_damage = false 
 
-# Chamado EXCLUSIVAMENTE pelo boss
+# Chamado pelo boss - Agora ele apenas executa a função acima
 func levar_dano_do_boss():
-	if player_is_dead or is_dashing or is_taking_damage: return
-	
-	boss_hit_count += 1
-	player_health -= 1
-	is_taking_damage = true 
-	is_attacking = false 
-	is_dashing = false
-	
-	if boss_hit_count >= 10:
-		player_morrer()
-		return
-	
-	sprite.play("hurt")
-	var knockback_dir = 1 if sprite.flip_h else -1
-	velocity.x = knockback_dir * 300 
-	velocity.y = -100 
-	await sprite.animation_finished
-	is_taking_damage = false 
+	levar_dano_do_inimigo()
 
 func player_morrer():
 	player_is_dead = true

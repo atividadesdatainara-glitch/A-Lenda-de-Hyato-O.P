@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://vlal0nakrrp2" path="res://scripts/player/player.gd" id="5_h3m6f"]
 [ext_resource type="Script" uid="uid://c5iguddqi2q0i" path="res://scripts/inimigo_2/inimigo_2.gd" id="6_4gq5b"]
 [ext_resource type="PackedScene" uid="uid://0tiqb1rtilgj" path="res://scenes/icones/icon___inimigo_1.tscn" id="7_78klr"]
+[ext_resource type="PackedScene" uid="uid://c37bgam1uhtax" path="res://scenes/icones/icon___inimigo_2.tscn" id="10_inxi1"]
 
 [sub_resource type="GDScript" id="GDScript_d4yxq"]
 
@@ -19,7 +20,7 @@
 script = SubResource("GDScript_d4yxq")
 
 [node name="Boss" parent="." unique_id=476643638 groups=["boss"] instance=ExtResource("1_82j8m")]
-position = Vector2(1026, 283)
+position = Vector2(1079, 282)
 collision_layer = 2
 script = ExtResource("2_4gq5b")
 
@@ -32,7 +33,7 @@ position = Vector2(-44.000023, -45)
 scale = Vector2(0.04607506, 0.04761904)
 
 [node name="Inimigo 1" parent="." unique_id=2142985082 groups=["inimigos"] instance=ExtResource("2_h3m6f")]
-position = Vector2(1124, 242)
+position = Vector2(1044, 266)
 script = ExtResource("4_fonqh")
 
 [node name="lifebar" parent="Inimigo 1" unique_id=1817025129 instance=ExtResource("3_d4yxq")]
@@ -44,11 +45,17 @@ position = Vector2(-46.999992, -59.999996)
 scale = Vector2(0.049488034, 0.048701324)
 
 [node name="Inimigo 2" parent="." unique_id=1636653877 groups=["inimigos"] instance=ExtResource("3_fonqh")]
-position = Vector2(952, 306)
+visible = false
+position = Vector2(1047, 314)
 script = ExtResource("6_4gq5b")
 
 [node name="lifebar" parent="Inimigo 2" unique_id=1414761460 instance=ExtResource("3_d4yxq")]
-position = Vector2(103, -269)
+position = Vector2(-1.9999847, -124.000015)
+scale = Vector2(0.4583333, 0.546875)
+
+[node name="Icon - Inimigo 2" parent="Inimigo 2" unique_id=1473881919 instance=ExtResource("10_inxi1")]
+position = Vector2(-53.999985, -124.99999)
+scale = Vector2(0.05716734, 0.056818224)
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("4_f0mxy")]
 position = Vector2(236, 260)

@@ -11,6 +11,7 @@ var pode_atacar = true
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player = get_tree().current_scene.find_child("Player", true, false)
+@onready var barra = $lifebar
 
 func _ready():
 	add_to_group("inimigos")
@@ -76,6 +77,7 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead or is_emerging: return
 	health -= 1
+	barra.atualizar_barra(health, 20)
 	
 	if health <= 0:
 		morrer()
