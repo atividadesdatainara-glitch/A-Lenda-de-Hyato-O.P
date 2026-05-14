@@ -101,6 +101,10 @@ func _physics_process(delta):
 			boss_ativado = true
 			estado_atual = Estado.APROXIMANDO
 			modo_chao = false
+			
+			barra.modulate.a = 0
+			var tween = create_tween()
+			tween.tween_property(barra, "modulate:a", 1.0, 0.8)
 
 	if not player:
 		move_and_slide()
@@ -634,6 +638,8 @@ func tomar_dano():
 func morrer():
 	is_dead = true
 	is_attacking = false
+	var tween = create_tween()
+	tween.tween_property(barra, "modulate:a", 0.0, 0.5)
 	velocity = Vector2.ZERO
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)

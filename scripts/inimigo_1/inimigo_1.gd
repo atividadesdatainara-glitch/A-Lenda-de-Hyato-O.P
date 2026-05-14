@@ -15,9 +15,13 @@ var pode_atacar = true
 
 func _ready():
 	add_to_group("inimigos")
+	barra.modulate.a = 0
 	sprite.play("emerging")
 	await sprite.animation_finished
 	is_emerging = false
+	
+	var tween = create_tween()
+	tween.tween_property(barra, "modulate:a", 1.0, 0.5)
 
 func _physics_process(delta):
 	if is_dead: return 
@@ -92,6 +96,9 @@ func tomar_dano():
 func morrer():
 	if is_dead: return
 	is_dead = true
+	
+	var tween = create_tween()
+	tween.tween_property(barra, "modulate:a", 0.0, 0.3)
 	
 	set_physics_process(false) 
 	$CollisionShape2D.set_deferred("disabled", true)
