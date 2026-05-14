@@ -22,7 +22,7 @@ const COOLDOWN_ARCO = 1.5            # Ciclo de Pressão Aérea
 const SPEED_AVANCO = 340.0           # Avanço Rápido: dobro da velocidade normal
 const TEMPO_PARADO_REATIVO = 1.0     # Ataque Reativo: tempo que player fica parado
 
-var health = 50
+var health = 10
 var is_dead = false
 var is_attacking = false
 var is_taking_damage = false
@@ -612,7 +612,7 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead: return
 	health -= 1
-	barra.atualizar_barra(health, 50)
+	barra.atualizar_barra(health, 10)
 
 	if health <= 0:
 		morrer()

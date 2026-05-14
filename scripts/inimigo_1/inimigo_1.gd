@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 60.0        
 const ATTACK_RANGE = 70.0  
-var health = 10 
+var health = 20 
 var is_dead = false
 var is_emerging = true
 var is_attacking = false
@@ -73,7 +73,7 @@ func espera_frame_especifico(frame_alvo):
 func tomar_dano():
 	if is_dead or is_emerging: return
 	health -= 1
-	barra.atualizar_barra(health, 10)
+	barra.atualizar_barra(health, 20)
 	
 	if health <= 0:
 		morrer()
