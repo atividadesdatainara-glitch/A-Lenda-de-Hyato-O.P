@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400
-const DASH_SPEED = 1000.0 
+const SPEED = 220
+const JUMP_VELOCITY = -320
+const DASH_SPEED = 550
 
 const ATTACK_RANGE_X = 80.0  # alcance horizontal do ataque
 const ATTACK_RANGE_Y = 50.0  # tolerância vertical
@@ -51,7 +51,7 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_D): direction += 1
 	if Input.is_key_pressed(KEY_A): direction -= 1
 	
-	if Input.is_key_pressed(KEY_W) and is_on_floor() and not is_attacking:
+	if Input.is_key_pressed(KEY_SPACE) and is_on_floor() and not is_attacking:
 		velocity.y = JUMP_VELOCITY
 
 	if Input.is_key_pressed(KEY_L) and pode_dar_dash and not is_attacking:

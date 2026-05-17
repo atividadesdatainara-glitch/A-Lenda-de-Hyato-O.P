@@ -15,9 +15,26 @@ run/main_scene="uid://dg062kvb37vpk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/scale=2.0
+
+[global_group]
+
+Player=""
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Boss"
+2d_physics/layer_3="Chao"
+2d_physics/layer_4="..."
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=1000.0
+2d/default_gravity_vector=Vector2(0, 0)
 
 [rendering]
 

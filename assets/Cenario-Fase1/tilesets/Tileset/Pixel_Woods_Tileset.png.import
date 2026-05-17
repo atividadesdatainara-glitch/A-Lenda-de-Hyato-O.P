@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy85eld4nmdmn"
-path="res://.godot/imported/BG.png-93d3155f9fb75949af78b4aff9dc818f.ctex"
+uid="uid://bjd5ctpwd7ivl"
+path="res://.godot/imported/Pixel_Woods_Tileset.png-997d443de0f7c7514ff9b35d93a789a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Fundo/Arvores verdes/BG.png"
-dest_files=["res://.godot/imported/BG.png-93d3155f9fb75949af78b4aff9dc818f.ctex"]
+source_file="res://assets/Cenario-Fase1/tilesets/Tileset/Pixel_Woods_Tileset.png"
+dest_files=["res://.godot/imported/Pixel_Woods_Tileset.png-997d443de0f7c7514ff9b35d93a789a6.ctex"]
 
 [params]
 

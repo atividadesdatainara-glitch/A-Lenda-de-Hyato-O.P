@@ -7,11 +7,11 @@ size = Vector2(1481, 63)
 
 [node name="Chão" type="StaticBody2D" unique_id=911201061]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=823669939]
-position = Vector2(476.49997, 49)
-scale = Vector2(3.024048, 1)
-texture = ExtResource("1_0xgmk")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=741888367]
 position = Vector2(479.5, 38)
 shape = SubResource("RectangleShape2D_5cx67")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1695364521]
+position = Vector2(473, 52)
+scale = Vector2(3.0791583, 1)
+texture = ExtResource("1_0xgmk")

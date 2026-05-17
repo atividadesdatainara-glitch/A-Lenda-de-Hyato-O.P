@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dytkksed1pqaf"
-path="res://.godot/imported/Woods 1.png-5aca90bf373e3080686e73906bc4934a.ctex"
+uid="uid://dv473v5qwk5lv"
+path="res://.godot/imported/Lights 1.png-037c718caf9a401c49ae429307c293ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Fundo/Arvores rosa/Woods 1.png"
-dest_files=["res://.godot/imported/Woods 1.png-5aca90bf373e3080686e73906bc4934a.ctex"]
+source_file="res://assets/Cenario-Fase1/tilesets/Fundo/Arvores verdes/Lights 1.png"
+dest_files=["res://.godot/imported/Lights 1.png-037c718caf9a401c49ae429307c293ad.ctex"]
 
 [params]
 

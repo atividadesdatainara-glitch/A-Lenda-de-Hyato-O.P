@@ -489,7 +489,9 @@ animations = [{
 radius = 4.0
 height = 34.0
 
-[node name="Player" type="CharacterBody2D" unique_id=2051129159]
+[node name="Player" type="CharacterBody2D" unique_id=2051129159 groups=["player"]]
+platform_floor_layers = 4294901764
+platform_wall_layers = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1404386187]
 position = Vector2(-1, -15)

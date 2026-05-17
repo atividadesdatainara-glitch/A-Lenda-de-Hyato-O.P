@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wx0hlmm12uux"
-path="res://.godot/imported/Nada de mais.svg-603ea90128211590971f64df242b2fe0.ctex"
+uid="uid://b2min3ay62mwo"
+path="res://.godot/imported/Lights 2.png-8c39227bbe1384fdd5e7d017a2f990b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Nada de mais.svg"
-dest_files=["res://.godot/imported/Nada de mais.svg-603ea90128211590971f64df242b2fe0.ctex"]
+source_file="res://assets/Cenario-Fase1/tilesets/Fundo/Arvores verdes/Lights 2.png"
+dest_files=["res://.godot/imported/Lights 2.png-8c39227bbe1384fdd5e7d017a2f990b6.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
