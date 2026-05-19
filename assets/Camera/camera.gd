@@ -1,19 +1,32 @@
 extends Camera2D
 
-var target: Node2D # aqui vai seguir o player
+var target: CharacterBody2D
+var offset_x = 0.0
 
 func _ready() -> void:
 	get_targert()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+
+func _process(_delta):
+
 	if target:
-		position = target.position #aqui copia o movimento do player ou seja vai segui-lo
-	
-func get_targert(): # quando nao achar o player
-	var nodes = get_tree().get_nodes_in_group("Player") # Os nos do grupo pleyer
-	if nodes.size() == 0: 
+
+		if target.velocity.x > 0:
+			offset_x = lerp(offset_x, 40.0, 0.05)
+
+		elif target.velocity.x < 0:
+			offset_x = lerp(offset_x, -70.0, 0.05)
+
+		else:
+			offset_x = lerp(offset_x, 0.0, 0.01)
+
+		position = target.position + Vector2(offset_x, 0)
+
+func get_targert():
+
+	var nodes = get_tree().get_nodes_in_group("Player")
+
+	if nodes.size() == 0:
 		push_error("Player nao encontrado")
 		return
-		
+
 	target = nodes[0]
-	

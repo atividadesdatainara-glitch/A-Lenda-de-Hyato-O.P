@@ -1401,8 +1401,8 @@ position = Vector2(192, 128)
 script = ExtResource("3_wiamh")
 
 [node name="camera" parent="." unique_id=487859855 instance=ExtResource("3_3x86c")]
-offset = Vector2(45, 0)
-limit_left = -18
-limit_top = -170
-limit_right = 9999982
-limit_bottom = 638
+offset = Vector2(50, 0)
+limit_left = -16
+limit_top = -161
+limit_right = 9999984
+limit_bottom = 647

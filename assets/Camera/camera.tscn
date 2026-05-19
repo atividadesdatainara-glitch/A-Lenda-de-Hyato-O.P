@@ -6,4 +6,5 @@
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_bottom = 280
+position_smoothing_enabled = true
 script = ExtResource("1_i885y")
