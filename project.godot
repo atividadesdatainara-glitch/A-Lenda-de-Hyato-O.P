@@ -15,10 +15,6 @@ run/main_scene="uid://dg062kvb37vpk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
-
-window/stretch/scale=1.75
-
 [global_group]
 
 Player=""
