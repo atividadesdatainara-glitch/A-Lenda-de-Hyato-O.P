@@ -14,7 +14,7 @@ func _process(_delta):
 			offset_x = lerp(offset_x, 40.0, 0.05)
 
 		elif target.velocity.x < 0:
-			offset_x = lerp(offset_x, -70.0, 0.05)
+			offset_x = lerp(offset_x, -40.0, 0.05)
 
 		else:
 			offset_x = lerp(offset_x, 0.0, 0.01)

@@ -46,22 +46,22 @@ func _physics_process(delta):
 		if combo_reset_timer >= COMBO_RESET_TEMPO:
 			combo_count = 0
 			combo_reset_timer = 0.0
+#----
+	var direction = Input.get_axis("move_left", "move_right")
 
-	var direction = 0
-	if Input.is_key_pressed(KEY_D): direction += 1
-	if Input.is_key_pressed(KEY_A): direction -= 1
-	
-	if Input.is_key_pressed(KEY_SPACE) and is_on_floor() and not is_attacking:
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_attacking:
 		velocity.y = JUMP_VELOCITY
 
-	if Input.is_key_pressed(KEY_L) and pode_dar_dash and not is_attacking:
+	if Input.is_action_just_pressed("dash") and pode_dar_dash and not is_attacking:
 		executar_dash()
 		return 
 
-	if Input.is_key_pressed(KEY_J):
+	if Input.is_action_just_pressed("attack_light"):
 		iniciar_sequencia_ataque("leve")
-	elif Input.is_key_pressed(KEY_K) and is_on_floor():
+
+	elif Input.is_action_just_pressed("attack_heavy") and is_on_floor():
 		iniciar_sequencia_ataque("pesado")
+		#------
 
 	if direction != 0 and not is_attacking:
 		velocity.x = direction * SPEED
