@@ -67,25 +67,19 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_2kltu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_vc7fq")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_hqnka")
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_bcepm")
 }, {
 "duration": 1.0,
+"texture": ExtResource("7_cp84q")
+}, {
+"duration": 1.0,
 "texture": ExtResource("5_w28ya")
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_67qay")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_cp84q")
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_uf25r")
@@ -110,6 +104,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("15_rbbb7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_2kltu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vc7fq")
 }],
 "loop": false,
 "name": &"attack1",
@@ -117,9 +117,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_kmw4b")
-}, {
-"duration": 1.0,
 "texture": ExtResource("17_mkxpr")
 }, {
 "duration": 1.0,
@@ -159,9 +156,6 @@ animations = [{
 "texture": ExtResource("29_mkjeu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("30_su66l")
-}, {
-"duration": 1.0,
 "texture": ExtResource("31_fu13p")
 }, {
 "duration": 1.0,
@@ -174,6 +168,9 @@ animations = [{
 "texture": ExtResource("34_i824f")
 }, {
 "duration": 1.0,
+"texture": ExtResource("30_su66l")
+}, {
+"duration": 1.0,
 "texture": ExtResource("35_smhd1")
 }, {
 "duration": 1.0,
@@ -181,6 +178,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("37_v64em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kmw4b")
 }],
 "loop": false,
 "name": &"death",
@@ -188,12 +188,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("37_v64em")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_gu4s7")
-}, {
-"duration": 1.0,
 "texture": ExtResource("35_smhd1")
 }, {
 "duration": 1.0,
@@ -252,6 +246,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_kmw4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_v64em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_gu4s7")
 }],
 "loop": false,
 "name": &"emerging",
@@ -302,12 +302,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("49_gik27")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_6jx6c")
-}, {
-"duration": 1.0,
 "texture": ExtResource("51_355qq")
 }, {
 "duration": 1.0,
@@ -336,6 +330,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("60_px6l7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_gik27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_6jx6c")
 }],
 "loop": true,
 "name": &"walk",

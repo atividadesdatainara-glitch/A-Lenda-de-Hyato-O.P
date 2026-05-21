@@ -1,32 +1,29 @@
 extends Camera2D
 
-var target: CharacterBody2D
-var offset_x = 0.0
+@export var player: Node2D
+@export var room_position: Vector2 = Vector2.ZERO
+@export var room_size: Vector2 = Vector2(1920, 1080)
+@export var follow_speed: float = 5.0
 
-func _ready() -> void:
-	get_targert()
+func _ready():
+	if player == null:
+		push_error("Camera2D: Player não definido!")
 
-func _process(_delta):
-
-	if target:
-
-		if target.velocity.x > 0:
-			offset_x = lerp(offset_x, 40.0, 0.05)
-
-		elif target.velocity.x < 0:
-			offset_x = lerp(offset_x, -40.0, 0.05)
-
-		else:
-			offset_x = lerp(offset_x, 0.0, 0.01)
-
-		position = target.position + Vector2(offset_x, 0)
-
-func get_targert():
-
-	var nodes = get_tree().get_nodes_in_group("Player")
-
-	if nodes.size() == 0:
-		push_error("Player nao encontrado")
+func _process(delta):
+	if player == null:
 		return
 
-	target = nodes[0]
+	# Posição desejada baseada na posição do player
+	var target_position := player.global_position
+
+	# Suaviza o movimento da câmera
+	global_position = global_position.lerp(target_position, follow_speed * delta)
+
+	# Calcula os limites da câmera com base no tamanho da viewport
+	var half_viewport := get_viewport_rect().size * 0.5
+	var min_limit := room_position + half_viewport
+	var max_limit := room_position + room_size - half_viewport
+
+	# Limita a posição da câmera dentro da sala
+	global_position.x = clamp(global_position.x, min_limit.x, max_limit.x)
+	global_position.y = clamp(global_position.y, min_limit.y, max_limit.y)

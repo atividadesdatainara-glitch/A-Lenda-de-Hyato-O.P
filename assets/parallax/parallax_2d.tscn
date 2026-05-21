@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d136tkpl8srdn"]
+
+[ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="1_cvvfx"]
+[ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="2_j4foe"]
+[ext_resource type="Texture2D" uid="uid://bqwvqhf4m1vbc" path="res://assets/parallax/DarkForest_Shadow.png" id="3_x5atg"]
+[ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="4_f5vep"]
+
+[node name="Parallax2D" type="ParallaxBackground" unique_id=719594346]
+
+[node name="4" type="ParallaxLayer" parent="." unique_id=331590112]
+
+[node name="testura" type="Sprite2D" parent="4" unique_id=338144619]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_cvvfx")
+centered = false
+
+[node name="3" type="ParallaxLayer" parent="." unique_id=1631007109]
+
+[node name="Sprite2D" type="Sprite2D" parent="3" unique_id=640271690]
+texture = ExtResource("2_j4foe")
+centered = false
+
+[node name="2" type="ParallaxLayer" parent="." unique_id=960457063]
+
+[node name="Sprite2D" type="Sprite2D" parent="2" unique_id=2053356752]
+texture = ExtResource("3_x5atg")
+centered = false
+
+[node name="1" type="ParallaxLayer" parent="." unique_id=430201914]
+
+[node name="Sprite2D" type="Sprite2D" parent="1" unique_id=392637813]
+texture = ExtResource("4_f5vep")
+centered = false
