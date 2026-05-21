@@ -13,7 +13,6 @@ config_version=5
 config/name="Alenda de Hyato"
 run/main_scene="uid://dg062kvb37vpk"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
 
 [global_group]
 
@@ -70,8 +69,7 @@ dash={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-2d/default_gravity=1000.0
-2d/default_gravity_vector=Vector2(0, 0)
+2d/default_gravity=1100.0
 
 [rendering]
 

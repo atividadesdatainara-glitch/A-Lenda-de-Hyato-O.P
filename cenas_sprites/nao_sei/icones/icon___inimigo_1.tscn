@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://0tiqb1rtilgj"]
+
+[ext_resource type="Texture2D" uid="uid://mwvd4rvmkk5f" path="res://cenas_sprites/nao_sei/icones/inimigo_1.png" id="1_32o3b"]
+
+[node name="Icon - Inimigo 1" type="Sprite2D" unique_id=1359709204]
+texture = ExtResource("1_32o3b")

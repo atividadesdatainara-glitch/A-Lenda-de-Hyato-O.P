@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ch45bksfe4o3c"]
+
+[ext_resource type="Texture2D" uid="uid://cgbgcar7ghrek" path="res://cenas_sprites/nao_sei/icones/player.png" id="1_oo1pt"]
+
+[node name="Icon - Player 1" type="Sprite2D" unique_id=728835404]
+texture = ExtResource("1_oo1pt")
