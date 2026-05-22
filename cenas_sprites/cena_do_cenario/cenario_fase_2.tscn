@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_rs6jl"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_nmts4"]
-[ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="11_0741y"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_v6pyl"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_r8egk"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_fjfc5"]
@@ -1061,16 +1060,13 @@ scale = Vector2(0.75, 0.75)
 tile_map_data = PackedByteArray("AAAeAAcAAAAAAAAAAgAfAAcAAAAAAAAAAgAgAAcAAAAAAAAAAgAhAAcAAAAAAAAAAgAiAAcAAAAAAAAAAgAjAAcAAAAAAAAAAgAkAAcAAAAAAAAAAgAlAAcAAAAAAAAAAgAmAAcAAAAAAAAAAgAnAAcAAAAAAAAAAgAoAAcAAAAAAAAAAgApAAcAAAAAAAAAAgAqAAcAAAAAAAAAAgArAAcAAAAAAAAAAgAsAAcAAAAAAAAAAgAtAAcAAAAAAAAAAgAuAAcAAAAAAAAAAgAvAAcAAAAAAAAAAgAwAAcAAAAAAAAAAgAxAAcAAAAAAAAAAgAyAAcAAAAAAAAAAgAzAAcAAAAAAAAAAgA0AAcAAAAAAAAAAgA1AAcAAAAAAAAAAgA2AAcAAAAAAAAAAgA3AAcAAAAAAAAAAgA4AAcAAAAAAAAAAgA5AAcAAAAAAAAAAgA6AAcAAAAAAAAAAgA7AAcAAAAAAAAAAgA8AAcAAAAAAAAAAgA9AAcAAAAAAAAAAgA+AAcAAAAAAAAAAgA/AAcAAAAAAAAAAgBAAAcAAAAAAAAAAgBBAAcAAAAAAAAAAgBCAAcAAAAAAAAAAgBDAAcAAAAAAAAAAgBEAAcAAAAAAAAAAgBFAAcAAAAAAAAAAgBGAAcAAAAAAAAAAgBHAAcAAAAAAAAAAgBLAAcAAAAAAAAAAgBMAAcAAAAAAAAAAgBNAAcAAAAAAAAAAgBOAAcAAAAAAAAAAgBPAAcAAAAAAAAAAgBQAAcAAAAAAAAAAgBRAAcAAAAAAAAAAgBSAAcAAAAAAAAAAgBTAAcAAAAAAAAAAgBUAAcAAAAAAAAAAgBVAAcAAAAAAAAAAgBWAAcAAAAAAAAAAgBXAAcAAAAAAAAAAgBYAAcAAAAAAAAAAgBZAAcAAAAAAAAAAgBaAAcAAAAAAAAAAgBbAAcAAAAAAAAAAgBcAAcAAAAAAAAAAgBdAAcAAAAAAAAAAgBeAAcAAAAAAAAAAgBfAAcAAAAAAAAAAgBgAAcAAAAAAAAAAgBhAAcAAAAAAAAAAgBiAAcAAAAAAAAAAgBjAAcAAAAAAAAAAgBkAAcAAAAAAAAAAgBlAAcAAAAAAAAAAgBmAAcAAAAAAAAAAgBnAAcAAAAAAAAAAgBoAAcAAAAAAAAAAgBpAAcAAAAAAAAAAgBqAAcAAAAAAAAAAgBrAAcAAAAAAAAAAgBsAAcAAAAAAAAAAgBtAAcAAAAAAAAAAgBuAAcAAAAAAAAAAgBvAAcAAAAAAAAAAgBwAAcAAAAAAAAAAgBxAAcAAAAAAAAAAgByAAcAAAAAAAAAAgBzAAcAAAAAAAAAAgB0AAcAAAAAAAAAAgB1AAcAAAAAAAAAAgB2AAcAAAAAAAAAAgB3AAcAAAAAAAAAAgB4AAcAAAAAAAAAAgB5AAcAAAAAAAAAAgB6AAcAAAAAAAAAAgB7AAcAAAAAAAAAAgA=")
 tile_set = SubResource("TileSet_v2rml")
 
-[node name="Player" parent="." unique_id=2051129159 groups=["Player"] instance=ExtResource("11_0741y")]
-position = Vector2(48, -80)
-
 [node name="camera" parent="." unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("12_v6pyl")]
 position = Vector2(1, 0)
 limit_left = 2
 limit_top = -240
 limit_right = 10000038
 limit_bottom = 128
-player = NodePath("../Player")
+player = NodePath("")
 room_position = Vector2(-300, 0)
 room_size = Vector2(3000, 1080)
 

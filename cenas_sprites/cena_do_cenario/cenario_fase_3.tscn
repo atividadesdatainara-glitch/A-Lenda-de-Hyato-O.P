@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://bqfy1eaxxlni6"]
 
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_c00lf"]
-[ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="11_fet4e"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_3j8fj"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_44lko"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_0rbtq"]
@@ -1044,16 +1043,12 @@ tile_set = SubResource("TileSet_pltco")
 tile_map_data = PackedByteArray("AAAFAAQAAAANAAkAAAAHAAQAAAAPAAkAAAAZAAIAAAAQAA4AAQAlAAEAAAAPAA8AAQA8AAAAAAAQAA4AAgBNAP7/AAANAAkAAABZAPX/AAANAAkAAAA=")
 tile_set = SubResource("TileSet_1k2b4")
 
-[node name="Player" parent="." unique_id=2051129159 groups=["Player"] instance=ExtResource("11_fet4e")]
-position = Vector2(16, 64)
-
-[node name="camera" parent="." unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("12_3j8fj")]
+[node name="camera" parent="." unique_id=487859855 instance=ExtResource("12_3j8fj")]
 position = Vector2(1, 0)
 limit_left = 2
 limit_top = -240
 limit_right = 10000038
 limit_bottom = 128
-player = NodePath("../Player")
 room_position = Vector2(-300, 0)
 room_size = Vector2(4000, 1080)
 
