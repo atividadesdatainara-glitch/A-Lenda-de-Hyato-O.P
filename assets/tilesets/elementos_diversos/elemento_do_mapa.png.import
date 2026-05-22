@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu3338ns15dew"
-path="res://.godot/imported/Fog.png-1221ccc2a5dddb93da58e5f51a560111.ctex"
+uid="uid://bjd5ctpwd7ivl"
+path="res://.godot/imported/elemento_do_mapa.png-9a61f5fc21d3762bbd907498f965756b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Cenario-Fase1/tilesets/Fundo/Arvores rosa/Fog.png"
-dest_files=["res://.godot/imported/Fog.png-1221ccc2a5dddb93da58e5f51a560111.ctex"]
+source_file="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png"
+dest_files=["res://.godot/imported/elemento_do_mapa.png-9a61f5fc21d3762bbd907498f965756b.ctex"]
 
 [params]
 

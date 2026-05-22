@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://v756vbboohf1" path="res://cenas_sprites/inimigo_2/cena/inimigo_2.tscn" id="6_r3fqc"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="8_tb1w2"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="10_mboee"]
-[ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/Cenario-Fase1/tilesets/Fundo/elementos/Pixel_Woods_Tileset.png" id="11_dy4pt"]
+[ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="11_dy4pt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dit6d"]
 texture = ExtResource("11_dy4pt")
