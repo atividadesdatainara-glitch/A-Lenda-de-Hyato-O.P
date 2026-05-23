@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://btmpmh0u5nxy8"]
+
+[ext_resource type="Script" uid="uid://j4o02rt5naps" path="res://cenas_sprites/checkpoints/checkpoint1/script/checkpoint_1.gd" id="1_10xhx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxve1"]
+size = Vector2(41, 109)
+
+[node name="Checkpoint1" type="Area2D" unique_id=604722356]
+collision_layer = 0
+script = ExtResource("1_10xhx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606121939]
+position = Vector2(1, -46)
+shape = SubResource("RectangleShape2D_rxve1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

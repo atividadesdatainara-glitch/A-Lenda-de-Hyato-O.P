@@ -1,7 +1,10 @@
 [gd_scene format=4 uid="uid://cl08em5op3sbc"]
 
+[ext_resource type="PackedScene" uid="uid://de375040cbxb8" path="res://cenas_sprites/area_agua/cena/areagua.tscn" id="3_0ya61"]
+[ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="3_apho0"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_bqmhv"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_bxft1"]
+[ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoints/checkpoint1/cena/checkpoint_1.tscn" id="10_gc0ev"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="13_2q6g4"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_3hfux"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_xdk6v"]
@@ -9,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="16_yodk6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apho0"]
-load_path = "res://.godot/imported/Woods 2.png-cf1b1ee019377bc2a32a54cc943209e8.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyl8h"]
 texture = SubResource("CompressedTexture2D_apho0")
@@ -162,7 +164,6 @@ texture = SubResource("CompressedTexture2D_apho0")
 15:10/0 = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m8gry"]
-load_path = "res://.godot/imported/Woods 1.png-061a9db0b939f1cbcca99bbdfe476a22.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlffq"]
 texture = SubResource("CompressedTexture2D_m8gry")
@@ -1305,7 +1306,13 @@ scale = Vector2(1.3333334, 1.3333334)
 tile_map_data = PackedByteArray("AAA0AAUAAAACAA4AAAA0AAYAAAACAA8ABwA0AAcAAAACAA8AAAA0AAgAAAACAA8AAAA0AAkAAAACAA8AAAA1AAUAAAACAA4AAAA1AAYAAAACAA8ABwA1AAcAAAACAA8AAAA1AAgAAAACAA8AAAA1AAkAAAACAA8AAAA2AAUAAAACAA4AAAA2AAYAAAACAA8ABwA2AAcAAAACAA8AAAA2AAgAAAACAA8AAAA2AAkAAAACAA8AAAA3AAUAAAACAA4AAAA3AAYAAAACAA8ABwA3AAcAAAACAA8AAAA3AAgAAAACAA8AAAA3AAkAAAACAA8AAAA4AAUAAAACAA4AAAA4AAYAAAACAA8ABwA4AAcAAAACAA8AAAA4AAgAAAACAA8AAAA4AAkAAAACAA8AAAA5AAUAAAACAA4AAAA5AAYAAAACAA8ABwA5AAcAAAACAA8AAAA5AAgAAAACAA8AAAA5AAkAAAACAA8AAAA6AAUAAAACAA4AAAA6AAYAAAACAA8ABwA6AAcAAAACAA8AAAA6AAgAAAACAA8AAAA6AAkAAAACAA8AAAA7AAUAAAACAA4AAAA7AAYAAAACAA8ABwA7AAcAAAACAA8AAAA7AAgAAAACAA8AAAA7AAkAAAACAA8AAAA8AAUAAAACAA4AAAA8AAYAAAACAA8ABwA8AAcAAAACAA8AAAA8AAgAAAACAA8AAAA8AAkAAAACAA8AAAA9AAUAAAACAA4AAAA9AAYAAAACAA8ABwA9AAcAAAACAA8AAAA9AAgAAAACAA8AAAA9AAkAAAACAA8AAAA+AAUAAAACAA4AAAA+AAYAAAACAA8ABwA+AAcAAAACAA8AAAA+AAgAAAACAA8AAAA+AAkAAAACAA8AAAA/AAUAAAACAA4AAAA/AAYAAAACAA8AAAA/AAcAAAACAA8AAAA/AAgAAAACAA8AAAA/AAkAAAACAA8AAABAAAUAAAACAA4AAABAAAYAAAACAA8AAABAAAcAAAACAA8AAABAAAgAAAACAA8AAABAAAkAAAACAA8AAABBAAUAAAACAA4AAABBAAYAAAACAA8AAABBAAcAAAACAA8AAABBAAgAAAACAA8AAABBAAkAAAACAA8AAABCAAUAAAACAA4AAABCAAYAAAACAA8AAABCAAcAAAACAA8AAABCAAgAAAACAA8AAABCAAkAAAACAA8AAABmAAIAAAABAAIAAABmAAEAAAABAAIAAAA=")
 tile_set = SubResource("TileSet_3x86c")
 
-[node name="camera" parent="." unique_id=487859855 instance=ExtResource("13_2q6g4")]
+[node name="areagua" parent="armadilhas" unique_id=1503673010 instance=ExtResource("3_0ya61")]
+position = Vector2(1132, 209.33334)
+
+[node name="Player" parent="." unique_id=2051129159 instance=ExtResource("3_apho0")]
+position = Vector2(51, 62)
+
+[node name="camera" parent="Player" unique_id=487859855 instance=ExtResource("13_2q6g4")]
 position = Vector2(1, 0)
 limit_left = 2
 limit_top = -240
@@ -1366,3 +1373,7 @@ position = Vector2(1, -164)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("16_yodk6")
 centered = false
+
+[node name="Checkpoint1" parent="." unique_id=604722356 instance=ExtResource("10_gc0ev")]
+position = Vector2(777, 53)
+scale = Vector2(1.5, 1.5)

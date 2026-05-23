@@ -20,8 +20,19 @@ var player_health = 10
 var player_is_dead = false
 var boss_hit_count = 0
 
+# --- SISTEMA DE CHECKPOINT ---
+var checkpoint_atual: Vector2
+
+# --- SISTEMA DE RESPAWN GLOBAL ---
+var posicao_inicial_fase: Vector2
+
 @onready var sprite = $AnimatedSprite2D
 @onready var barra = $lifebar
+
+func _ready():
+	# Define a posição onde o jogador inicia o mapa como o primeiro checkpoint
+	checkpoint_atual = global_position
+	posicao_inicial_fase = global_position
 
 func _physics_process(delta):
 	if player_is_dead: return
@@ -201,6 +212,71 @@ func levar_dano_do_boss():
 
 func player_morrer():
 	player_is_dead = true
+	set_physics_process(false) # Desliga a física para evitar bugs na queda enquanto morre
 	velocity = Vector2.ZERO
 	sprite.play("death")
-	await sprite.animation_finished
+	
+	# Espera a animação de morte que você já tinha terminar
+	await sprite.animation_finished 
+	
+	# Uma pausa dramática de 0.5 segundos com ele caído no chão
+	await get_tree().create_timer(0.5).timeout
+	
+	# Restaura a vida do player para 100% e atualiza a barra
+	player_health = 10
+	barra.atualizar_barra(player_health, 10)
+	
+	# TELEPORTA de volta para o ponto de início do mapa
+	global_position = posicao_inicial_fase
+	
+	# Reseta o checkpoint atual para o início também (assim limpa o da árvore)
+	checkpoint_atual = posicao_inicial_fase
+	
+	# Coloca o player na animação padrão de pé
+	sprite.play("idle")
+	
+	# Tira o estado de morto e religa os controles/física do jogo
+	player_is_dead = false
+	set_physics_process(true)
+
+# --- NOVAS FUNÇÕES DO SISTEMA DE CHECKPOINT E AGUA ---
+
+# Chamada pelo script do Checkpoint invisível para salvar a posição
+func definir_novo_checkpoint(nova_posicao: Vector2):
+	checkpoint_atual = nova_posicao
+
+# Chamada quando entra na Area2D da água
+func cair_na_agua():
+	if player_is_dead: return
+	
+	player_health -= 1
+	barra.atualizar_barra(player_health, 10)
+	
+	# 1. PARALISA A FÍSICA DO PLAYER (Evita o bug de atravessar o chão)
+	set_physics_process(false)
+	
+	# Força o reset de todos os estados imediatos
+	velocity = Vector2.ZERO
+	is_attacking = false
+	is_dashing = false
+	is_taking_damage = false
+	
+	# Se a vida acabar com o dano da água, ele morre
+	if player_health <= 0:
+		set_physics_process(true) # Reativa antes de morrer para não travar a cena
+		player_morrer()
+		return
+		
+	# Pisca ou finge um dano rápido
+	if sprite.sprite_frames.has_animation("hurt"):
+		sprite.play("hurt")
+	
+	# 2. COLOCA O TEMPO DE ESPERA (0.4 segundos dá um tempo ótimo de reação)
+	await get_tree().create_timer(0.4).timeout
+	
+	# 3. TELEPORTA COM SEGURANÇA
+	global_position = checkpoint_atual
+	velocity = Vector2.ZERO # Garante velocidade zero pós-teleporte
+	
+	# 4. REATIVA A FÍSICA (O player volta a se mover normalmente na terra firme)
+	set_physics_process(true)
