@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://b78ycgns71t5s"]
 
+[ext_resource type="PackedScene" uid="uid://crc1ic6iy6t3" path="res://cenas_sprites/area_de_morte_fase_2/cena/area_de_morte.tscn" id="3_qjqq7"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_rs6jl"]
+[ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="4_4dgcl"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_nmts4"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_v6pyl"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_r8egk"]
@@ -9,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="16_lbq3g"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apho0"]
-load_path = "res://.godot/imported/Woods 2.png-cf1b1ee019377bc2a32a54cc943209e8.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyl8h"]
 texture = SubResource("CompressedTexture2D_apho0")
@@ -162,7 +163,6 @@ texture = SubResource("CompressedTexture2D_apho0")
 15:10/0 = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m8gry"]
-load_path = "res://.godot/imported/Woods 1.png-061a9db0b939f1cbcca99bbdfe476a22.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlffq"]
 texture = SubResource("CompressedTexture2D_m8gry")
@@ -1057,16 +1057,21 @@ tile_set = SubResource("TileSet_xjfoj")
 
 [node name="armadilhas" type="TileMapLayer" parent="." unique_id=576173200]
 scale = Vector2(0.75, 0.75)
-tile_map_data = PackedByteArray("AAAeAAcAAAAAAAAAAgAfAAcAAAAAAAAAAgAgAAcAAAAAAAAAAgAhAAcAAAAAAAAAAgAiAAcAAAAAAAAAAgAjAAcAAAAAAAAAAgAkAAcAAAAAAAAAAgAlAAcAAAAAAAAAAgAmAAcAAAAAAAAAAgAnAAcAAAAAAAAAAgAoAAcAAAAAAAAAAgApAAcAAAAAAAAAAgAqAAcAAAAAAAAAAgArAAcAAAAAAAAAAgAsAAcAAAAAAAAAAgAtAAcAAAAAAAAAAgAuAAcAAAAAAAAAAgAvAAcAAAAAAAAAAgAwAAcAAAAAAAAAAgAxAAcAAAAAAAAAAgAyAAcAAAAAAAAAAgAzAAcAAAAAAAAAAgA0AAcAAAAAAAAAAgA1AAcAAAAAAAAAAgA2AAcAAAAAAAAAAgA3AAcAAAAAAAAAAgA4AAcAAAAAAAAAAgA5AAcAAAAAAAAAAgA6AAcAAAAAAAAAAgA7AAcAAAAAAAAAAgA8AAcAAAAAAAAAAgA9AAcAAAAAAAAAAgA+AAcAAAAAAAAAAgA/AAcAAAAAAAAAAgBAAAcAAAAAAAAAAgBBAAcAAAAAAAAAAgBCAAcAAAAAAAAAAgBDAAcAAAAAAAAAAgBEAAcAAAAAAAAAAgBFAAcAAAAAAAAAAgBGAAcAAAAAAAAAAgBHAAcAAAAAAAAAAgBLAAcAAAAAAAAAAgBMAAcAAAAAAAAAAgBNAAcAAAAAAAAAAgBOAAcAAAAAAAAAAgBPAAcAAAAAAAAAAgBQAAcAAAAAAAAAAgBRAAcAAAAAAAAAAgBSAAcAAAAAAAAAAgBTAAcAAAAAAAAAAgBUAAcAAAAAAAAAAgBVAAcAAAAAAAAAAgBWAAcAAAAAAAAAAgBXAAcAAAAAAAAAAgBYAAcAAAAAAAAAAgBZAAcAAAAAAAAAAgBaAAcAAAAAAAAAAgBbAAcAAAAAAAAAAgBcAAcAAAAAAAAAAgBdAAcAAAAAAAAAAgBeAAcAAAAAAAAAAgBfAAcAAAAAAAAAAgBgAAcAAAAAAAAAAgBhAAcAAAAAAAAAAgBiAAcAAAAAAAAAAgBjAAcAAAAAAAAAAgBkAAcAAAAAAAAAAgBlAAcAAAAAAAAAAgBmAAcAAAAAAAAAAgBnAAcAAAAAAAAAAgBoAAcAAAAAAAAAAgBpAAcAAAAAAAAAAgBqAAcAAAAAAAAAAgBrAAcAAAAAAAAAAgBsAAcAAAAAAAAAAgBtAAcAAAAAAAAAAgBuAAcAAAAAAAAAAgBvAAcAAAAAAAAAAgBwAAcAAAAAAAAAAgBxAAcAAAAAAAAAAgByAAcAAAAAAAAAAgBzAAcAAAAAAAAAAgB0AAcAAAAAAAAAAgB1AAcAAAAAAAAAAgB2AAcAAAAAAAAAAgB3AAcAAAAAAAAAAgB4AAcAAAAAAAAAAgB5AAcAAAAAAAAAAgB6AAcAAAAAAAAAAgB7AAcAAAAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAeAAcAAAAAAAAAAgAfAAcAAAAAAAAAAgAgAAcAAAAAAAAAAgAhAAcAAAAAAAAAAgAiAAcAAAAAAAAAAgAjAAcAAAAAAAAAAgAkAAcAAAAAAAAAAgAlAAcAAAAAAAAAAgAmAAcAAAAAAAAAAgAnAAcAAAAAAAAAAgAoAAcAAAAAAAAAAgApAAcAAAAAAAAAAgAqAAcAAAAAAAAAAgArAAcAAAAAAAAAAgAsAAcAAAAAAAAAAgAtAAcAAAAAAAAAAgAuAAcAAAAAAAAAAgAvAAcAAAAAAAAAAgAwAAcAAAAAAAAAAgAxAAcAAAAAAAAAAgAyAAcAAAAAAAAAAgAzAAcAAAAAAAAAAgA0AAcAAAAAAAAAAgA1AAcAAAAAAAAAAgA2AAcAAAAAAAAAAgA3AAcAAAAAAAAAAgA4AAcAAAAAAAAAAgA5AAcAAAAAAAAAAgA6AAcAAAAAAAAAAgA7AAcAAAAAAAAAAgA8AAcAAAAAAAAAAgA9AAcAAAAAAAAAAgA+AAcAAAAAAAAAAgA/AAcAAAAAAAAAAgBAAAcAAAAAAAAAAgBBAAcAAAAAAAAAAgBCAAcAAAAAAAAAAgBDAAcAAAAAAAAAAgBEAAcAAAAAAAAAAgBFAAcAAAAAAAAAAgBGAAcAAAAAAAAAAgBHAAcAAAAAAAAAAgBLAAcAAAAAAAAAAgBMAAcAAAAAAAAAAgBNAAcAAAAAAAAAAgBOAAcAAAAAAAAAAgBPAAcAAAAAAAAAAgBQAAcAAAAAAAAAAgBRAAcAAAAAAAAAAgBSAAcAAAAAAAAAAgBTAAcAAAAAAAAAAgBUAAcAAAAAAAAAAgBVAAcAAAAAAAAAAgBWAAcAAAAAAAAAAgBXAAcAAAAAAAAAAgBYAAcAAAAAAAAAAgBZAAcAAAAAAAAAAgBaAAcAAAAAAAAAAgBbAAcAAAAAAAAAAgBcAAcAAAAAAAAAAgBdAAcAAAAAAAAAAgBeAAcAAAAAAAAAAgBfAAcAAAAAAAAAAgBgAAcAAAAAAAAAAgBhAAcAAAAAAAAAAgBiAAcAAAAAAAAAAgBjAAcAAAAAAAAAAgBkAAcAAAAAAAAAAgBlAAcAAAAAAAAAAgBmAAcAAAAAAAAAAgBnAAcAAAAAAAAAAgBoAAcAAAAAAAAAAgBpAAcAAAAAAAAAAgBqAAcAAAAAAAAAAgBrAAcAAAAAAAAAAgBsAAcAAAAAAAAAAgBtAAcAAAAAAAAAAgBuAAcAAAAAAAAAAgBvAAcAAAAAAAAAAgBwAAcAAAAAAAAAAgBxAAcAAAAAAAAAAgByAAcAAAAAAAAAAgBzAAcAAAAAAAAAAgB0AAcAAAAAAAAAAgB1AAcAAAAAAAAAAgB2AAcAAAAAAAAAAgB3AAcAAAAAAAAAAgB4AAcAAAAAAAAAAgB5AAcAAAAAAAAAAgB6AAcAAAAAAAAAAgB7AAcAAAAAAAAAAgBKAAcAAAABAAAAAGBJAAcAAAABAAAAAGBIAAcAAAABAAAAAGA=")
 tile_set = SubResource("TileSet_v2rml")
 
-[node name="camera" parent="." unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("12_v6pyl")]
+[node name="area_de_morte" parent="." unique_id=1503673010 instance=ExtResource("3_qjqq7")]
+position = Vector2(325, 105)
+
+[node name="Player" parent="." unique_id=2051129159 instance=ExtResource("4_4dgcl")]
+position = Vector2(29, -83)
+
+[node name="camera" parent="Player" unique_id=487859855 instance=ExtResource("12_v6pyl")]
 position = Vector2(1, 0)
 limit_left = 2
 limit_top = -240
 limit_right = 10000038
 limit_bottom = 128
-player = NodePath("")
 room_position = Vector2(-300, 0)
 room_size = Vector2(3000, 1080)
 
@@ -1105,7 +1110,6 @@ motion_scale = Vector2(0.8, 1)
 motion_mirroring = Vector2(320, 0)
 
 [node name="testura" type="Sprite2D" parent="parallax/Parallax/2" unique_id=1081309814]
-visible = false
 position = Vector2(1, -164)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("15_i8km7")

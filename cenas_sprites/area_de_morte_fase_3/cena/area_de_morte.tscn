@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ct02k7cwnauxn"]
+
+[ext_resource type="Script" uid="uid://6fnbxh4ubhrp" path="res://cenas_sprites/area_de_morte_fase_3/script/area_de_morte.gd" id="1_3wqnl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yj8yg"]
+size = Vector2(3229, 115)
+
+[node name="area_de_morte" type="Area2D" unique_id=1503673010]
+collision_layer = 0
+script = ExtResource("1_3wqnl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=314252669]
+position = Vector2(1604.5, 47.5)
+shape = SubResource("RectangleShape2D_yj8yg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
