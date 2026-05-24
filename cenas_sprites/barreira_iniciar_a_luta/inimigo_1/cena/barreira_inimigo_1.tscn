@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cw1t8drw2uwpy"]
+
+[ext_resource type="Script" uid="uid://c6fn4pkvqkk1d" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_1/script/barreira_inimigo_1.gd" id="1_yi44s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yi44s"]
+size = Vector2(37, 100)
+
+[node name="barreira_inimigo_1" type="Area2D" unique_id=1700755831]
+disable_mode = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_yi44s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470410873]
+shape = SubResource("RectangleShape2D_yi44s")

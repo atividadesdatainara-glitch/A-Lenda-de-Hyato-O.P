@@ -492,6 +492,7 @@ radius = 4.0
 height = 34.0
 
 [node name="Player" type="CharacterBody2D" unique_id=2051129159 groups=["player"]]
+collision_mask = 7
 platform_floor_layers = 4294901764
 platform_wall_layers = 1
 script = ExtResource("1_sea2i")
