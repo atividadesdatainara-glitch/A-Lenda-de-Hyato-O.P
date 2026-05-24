@@ -246,37 +246,13 @@ func definir_novo_checkpoint(nova_posicao: Vector2):
 	checkpoint_atual = nova_posicao
 
 # Chamada quando entra na Area2D da água
+# Função chamada quando o player cai na água
 func cair_na_agua():
 	if player_is_dead: return
 	
-	player_health -= 1
+	# Zera a vida imediatamente na barra para o jogador ver o dano
+	player_health = 0
 	barra.atualizar_barra(player_health, 10)
 	
-	# 1. PARALISA A FÍSICA DO PLAYER (Evita o bug de atravessar o chão)
-	set_physics_process(false)
-	
-	# Força o reset de todos os estados imediatos
-	velocity = Vector2.ZERO
-	is_attacking = false
-	is_dashing = false
-	is_taking_damage = false
-	
-	# Se a vida acabar com o dano da água, ele morre
-	if player_health <= 0:
-		set_physics_process(true) # Reativa antes de morrer para não travar a cena
-		player_morrer()
-		return
-		
-	# Pisca ou finge um dano rápido
-	if sprite.sprite_frames.has_animation("hurt"):
-		sprite.play("hurt")
-	
-	# 2. COLOCA O TEMPO DE ESPERA (0.4 segundos dá um tempo ótimo de reação)
-	await get_tree().create_timer(0.4).timeout
-	
-	# 3. TELEPORTA COM SEGURANÇA
-	global_position = checkpoint_atual
-	velocity = Vector2.ZERO # Garante velocidade zero pós-teleporte
-	
-	# 4. REATIVA A FÍSICA (O player volta a se mover normalmente na terra firme)
-	set_physics_process(true)
+	# Chama diretamente a função que você já testou e deu certo!
+	player_morrer()

@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://de375040cbxb8"]
 
-[ext_resource type="Script" uid="uid://dfwe88macexow" path="res://cenas_sprites/area_agua/script/areagua.gd" id="1_argo0"]
+[ext_resource type="Script" uid="uid://dfwe88macexow" path="res://cenas_sprites/area_de_morte/script/area_de_morte.gd" id="1_argo0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yj8yg"]
-size = Vector2(296, 115)
+size = Vector2(343, 115)
 
-[node name="areagua" type="Area2D" unique_id=1503673010]
+[node name="area_de_morte" type="Area2D" unique_id=1503673010]
 collision_layer = 0
 script = ExtResource("1_argo0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=314252669]
-position = Vector2(138, 47.5)
+position = Vector2(161.5, 47.5)
 shape = SubResource("RectangleShape2D_yj8yg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
