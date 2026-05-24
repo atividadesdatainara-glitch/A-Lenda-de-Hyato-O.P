@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://bqfy1eaxxlni6"]
 
+[ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="2_m2k1j"]
+[ext_resource type="PackedScene" uid="uid://ct02k7cwnauxn" path="res://cenas_sprites/area_de_morte_fase_3/cena/area_de_morte.tscn" id="2_pltco"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_c00lf"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_3j8fj"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_44lko"]
@@ -8,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="16_8v2c5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_apho0"]
-load_path = "res://.godot/imported/Woods 2.png-cf1b1ee019377bc2a32a54cc943209e8.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyl8h"]
 texture = SubResource("CompressedTexture2D_apho0")
@@ -161,7 +162,6 @@ texture = SubResource("CompressedTexture2D_apho0")
 15:10/0 = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m8gry"]
-load_path = "res://.godot/imported/Woods 1.png-061a9db0b939f1cbcca99bbdfe476a22.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlffq"]
 texture = SubResource("CompressedTexture2D_m8gry")
@@ -1043,18 +1043,25 @@ tile_set = SubResource("TileSet_pltco")
 tile_map_data = PackedByteArray("AAAFAAQAAAANAAkAAAAHAAQAAAAPAAkAAAAZAAIAAAAQAA4AAQAlAAEAAAAPAA8AAQA8AAAAAAAQAA4AAgBNAP7/AAANAAkAAABZAPX/AAANAAkAAAA=")
 tile_set = SubResource("TileSet_1k2b4")
 
-[node name="camera" parent="." unique_id=487859855 instance=ExtResource("12_3j8fj")]
+[node name="area_de_morte" parent="." unique_id=1503673010 instance=ExtResource("2_pltco")]
+position = Vector2(111, 172)
+
+[node name="Player" parent="." unique_id=2051129159 instance=ExtResource("2_m2k1j")]
+position = Vector2(2161, -7)
+
+[node name="camera" parent="Player" unique_id=487859855 instance=ExtResource("12_3j8fj")]
 position = Vector2(1, 0)
-limit_left = 2
-limit_top = -240
-limit_right = 10000038
-limit_bottom = 128
+limit_left = 12
+limit_top = -239
+limit_right = 10000048
+limit_bottom = 129
 room_position = Vector2(-300, 0)
 room_size = Vector2(4000, 1080)
 
 [node name="parallax" type="Node2D" parent="." unique_id=852175762]
 
 [node name="Parallax" type="ParallaxBackground" parent="parallax" unique_id=52439486]
+visible = false
 
 [node name="4" type="ParallaxLayer" parent="parallax/Parallax" unique_id=589737559]
 position = Vector2(-8, 0)
