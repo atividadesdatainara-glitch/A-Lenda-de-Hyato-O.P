@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_rs6jl"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="4_4dgcl"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_nmts4"]
+[ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="10_p0tep"]
+[ext_resource type="PackedScene" uid="uid://v756vbboohf1" path="res://cenas_sprites/inimigo_2/cena/inimigo_2.tscn" id="11_14tpq"]
+[ext_resource type="PackedScene" uid="uid://vy3k820wy0ep" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_2/cena/barreira_inimigo_2.tscn" id="12_dqewm"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_v6pyl"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_r8egk"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_fjfc5"]
@@ -1078,6 +1081,7 @@ room_size = Vector2(3000, 1080)
 [node name="parallax" type="Node2D" parent="." unique_id=852175762]
 
 [node name="Parallax" type="ParallaxBackground" parent="parallax" unique_id=52439486]
+visible = false
 
 [node name="4" type="ParallaxLayer" parent="parallax/Parallax" unique_id=589737559]
 position = Vector2(-8, 0)
@@ -1126,3 +1130,12 @@ position = Vector2(1, -164)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("16_lbq3g")
 centered = false
+
+[node name="Checkpoint" parent="." unique_id=604722356 instance=ExtResource("10_p0tep")]
+position = Vector2(1585, -27)
+
+[node name="Inimigo 2" parent="." unique_id=1636653877 instance=ExtResource("11_14tpq")]
+position = Vector2(2097, 86)
+
+[node name="barreira_inimigo_2" parent="." unique_id=1700755831 instance=ExtResource("12_dqewm")]
+position = Vector2(1752, 29)

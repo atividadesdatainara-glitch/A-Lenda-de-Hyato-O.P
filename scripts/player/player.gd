@@ -4,8 +4,8 @@ const SPEED = 200
 const JUMP_VELOCITY = -320
 const DASH_SPEED = 550
 
-const ATTACK_RANGE_X = 80.0  # alcance horizontal do ataque
-const ATTACK_RANGE_Y = 50.0  # tolerância vertical
+const ATTACK_RANGE_X = 80.0  
+const ATTACK_RANGE_Y = 50.0  
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
@@ -20,10 +20,7 @@ var player_health = 10
 var player_is_dead = false
 var boss_hit_count = 0
 
-# --- SISTEMA DE CHECKPOINT ---
 var checkpoint_atual: Vector2
-
-# --- SISTEMA DE RESPAWN GLOBAL ---
 var posicao_inicial_fase: Vector2
 
 @onready var sprite = $AnimatedSprite2D
@@ -221,23 +218,29 @@ func player_morrer():
 		
 	sprite.play("idle")
 	
-	# --- RESET DO ESTADO DE MOVIMENTO (CORREÇÃO DO TRAVAMENTO) ---
 	is_taking_damage = false
 	is_attacking = false
 	is_dashing = false
 	
-	# --- SISTEMA DE RESET DA ARENA DO BOSS ---
 	var fase = get_tree().current_scene
 	
-	var barreira = fase.find_child("barreira_inimigo_1", true, false)
-	if barreira and barreira.has_method("resetar_barreira"):
-		barreira.resetar_barreira()
-		
-	var boss = fase.find_child("Inimigo 1", true, false)
-	if not boss:
-		boss = fase.get_node_or_null("Inimigo 1")
-	if boss and boss.has_method("resetar_boss"):
-		boss.resetar_boss()
+	# Reset do Boss 1 e Barreira 1
+	var barreira1 = fase.find_child("barreira_inimigo_1", true, false)
+	if barreira1 and barreira1.has_method("resetar_barreira"):
+		barreira1.resetar_barreira()
+	var boss1 = fase.find_child("Inimigo 1", true, false)
+	if not boss1: boss1 = fase.get_node_or_null("Inimigo 1")
+	if boss1 and boss1.has_method("resetar_boss"):
+		boss1.resetar_boss()
+
+	# Reset do Boss 2 e Barreira 2
+	var barreira2 = fase.find_child("barreira_inimigo_2", true, false)
+	if barreira2 and barreira2.has_method("resetar_barreira"):
+		barreira2.resetar_barreira()
+	var boss2 = fase.find_child("Inimigo 2", true, false)
+	if not boss2: boss2 = fase.get_node_or_null("Inimigo 2")
+	if boss2 and boss2.has_method("resetar_boss"):
+		boss2.resetar_boss()
 
 	player_is_dead = false
 	set_physics_process(true)

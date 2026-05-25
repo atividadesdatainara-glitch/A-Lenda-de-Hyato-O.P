@@ -117,6 +117,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("16_kmw4b")
+}, {
+"duration": 1.0,
 "texture": ExtResource("17_mkxpr")
 }, {
 "duration": 1.0,
@@ -156,6 +159,9 @@ animations = [{
 "texture": ExtResource("29_mkjeu")
 }, {
 "duration": 1.0,
+"texture": ExtResource("30_su66l")
+}, {
+"duration": 1.0,
 "texture": ExtResource("31_fu13p")
 }, {
 "duration": 1.0,
@@ -168,9 +174,6 @@ animations = [{
 "texture": ExtResource("34_i824f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("30_su66l")
-}, {
-"duration": 1.0,
 "texture": ExtResource("35_smhd1")
 }, {
 "duration": 1.0,
@@ -178,15 +181,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("37_v64em")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_kmw4b")
 }],
 "loop": false,
 "name": &"death",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_v64em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_gu4s7")
+}, {
 "duration": 1.0,
 "texture": ExtResource("35_smhd1")
 }, {
@@ -246,12 +252,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_kmw4b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_v64em")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_gu4s7")
 }],
 "loop": false,
 "name": &"emerging",
@@ -345,15 +345,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7niul"]
 size = Vector2(63, 82)
 
-[node name="Inimigo_2" type="CharacterBody2D" unique_id=1636653877]
-process_mode = 4
+[node name="Inimigo 2" type="CharacterBody2D" unique_id=1636653877]
 collision_layer = 2
 script = ExtResource("1_g4qtr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1217756846]
 position = Vector2(-144, -163)
 sprite_frames = SubResource("SpriteFrames_uo6gs")
-animation = &"attack1"
+animation = &"death"
+frame = 21
+frame_progress = 1.0
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1569718059]

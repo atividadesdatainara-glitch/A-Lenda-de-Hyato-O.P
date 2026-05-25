@@ -129,19 +129,11 @@ func tomar_dano():
 func morrer():
 	if is_dead: return
 	is_dead = true
-	
 	var tween = create_tween()
 	tween.tween_property(barra, "modulate:a", 0.0, 0.3)
-	
-	set_physics_process(false) 
+	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	sprite.modulate = Color(1, 1, 1)
 	sprite.play("death")
 	await sprite.animation_finished
-	
-	var boss2 = get_parent().get_node_or_null("Inimigo 2")
-	if boss2:
-		boss2.visible = true
-		boss2.process_mode = Node.PROCESS_MODE_INHERIT
-	
 	queue_free()
