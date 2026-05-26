@@ -27,6 +27,10 @@ const COOLDOWN_ARCO        = 1.6
 const TEMPO_PARADO_REATIVO = 1.6
 const DELAY_ENTRADA        = 2.0
 
+# ── REVIDE: hits consecutivos do player para o boss revidar ──
+const HITS_PARA_REVIDAR   = 3
+const JANELA_HITS_SEQ     = 2.0   # segundos para os hits contarem como "combo"
+
 # ── Estado ───────────────────────────────────────────────────
 enum Estado { ESPERANDO, APROXIMANDO, ATACANDO, RECUANDO, FLUTUANDO }
 var estado_atual = Estado.ESPERANDO
@@ -55,8 +59,18 @@ var timer_delay          = 0.0
 var timer_estado         = 0.0
 var timer_modo           = 0.0
 
-# Suavização de entrada nos estados
-var vel_x_suave = 0.0
+# ── Fluidez: variação orgânica de velocidade e posição ──────
+var vel_x_suave       = 0.0
+var ruido_offset      = 0.0        # drift aleatório no eixo X durante FLUTUANDO
+var ruido_timer       = 0.0
+var ruido_vel_alvo    = 0.0
+
+# ── Anti-spam / Revide ───────────────────────────────────────
+var hits_consecutivos   = 0
+var timer_janela_hits   = 0.0
+var revide_pendente     = false    # sinaliza que o boss QUER revidar assim que puder
+var revide_em_andamento = false    # impede duplo revide
+var cooldown_global     = 0.0     # cooldown pós-revide para evitar loop imediato
 
 @onready var sprite = $AnimatedSprite2D
 @onready var player = get_tree().current_scene.find_child("Player", true, false)
@@ -84,7 +98,7 @@ func surgir_na_arena():
 # ═══════════════════════════════════════════════════════════════
 func _physics_process(delta):
 
-	# ── Morte: cai pela gravidade até o TileMap ──────────────
+	# ── Morte ────────────────────────────────────────────────
 	if morte_em_andamento:
 		if not is_on_floor():
 			velocity.y += 980.0 * delta
@@ -96,9 +110,27 @@ func _physics_process(delta):
 
 	if is_dead: return
 
-	# ── Flutuação senoidal ───────────────────────────────────
+	# ── Flutuação senoidal (levemente variada para parecer orgânico)
 	flutuacao_tempo  += delta
-	flutuacao_offset  = sin(flutuacao_tempo * 0.9) * 12.0
+	flutuacao_offset  = sin(flutuacao_tempo * 0.9) * 12.0 + sin(flutuacao_tempo * 1.7) * 3.5
+
+	# ── Drift orgânico: atualiza ruido de posição X periodicamente
+	ruido_timer += delta
+	if ruido_timer >= randf_range(1.2, 2.4):
+		ruido_timer    = 0.0
+		ruido_vel_alvo = randf_range(-18.0, 18.0)
+	ruido_offset = lerp(ruido_offset, ruido_vel_alvo, delta * 0.6)
+
+	# ── Janela de hits consecutivos ─────────────────────────
+	if hits_consecutivos > 0:
+		timer_janela_hits += delta
+		if timer_janela_hits >= JANELA_HITS_SEQ:
+			hits_consecutivos  = 0
+			timer_janela_hits  = 0.0
+
+	# ── Cooldown global pós-revide ───────────────────────────
+	if cooldown_global > 0.0:
+		cooldown_global -= delta
 
 	# ── Rastreia altura do chão pelo player ─────────────────
 	if player and is_instance_valid(player) and player.is_on_floor():
@@ -123,6 +155,12 @@ func _physics_process(delta):
 	if is_attacking:
 		_deriva_durante_ataque(delta)
 		move_and_slide()
+		return
+
+	# ── REVIDE PENDENTE: processa logo que sair do ataque ───
+	if revide_pendente and not revide_em_andamento and pode_atacar and cooldown_global <= 0.0:
+		revide_pendente = false
+		_executar_revide()
 		return
 
 	if not boss_ativado or not is_instance_valid(player):
@@ -205,17 +243,17 @@ func _estado_aproximando(delta):
 		_escolher_ataque()
 		return
 
-	# Velocidade base
 	var speed = SPEED_CHAO if modo_chao else SPEED_AR
 
-	# Avanço rápido se muito distante
+	# Pequena variação orgânica de velocidade (0.92–1.08)
+	speed *= randf_range(0.92, 1.08)
+
 	if dist_x > DIST_ATAQUE * 3.0 and not avanco_ativo and pode_atacar:
 		avanco_ativo = true
 		get_tree().create_timer(1.0).timeout.connect(func(): avanco_ativo = false)
 	if avanco_ativo:
 		speed = SPEED_AVANCO
 
-	# Velocidade alvo suavizada
 	var vel_alvo = 0.0
 	if dist_x > DIST_ATAQUE + 15.0:
 		vel_alvo = dir * speed
@@ -227,8 +265,7 @@ func _estado_aproximando(delta):
 		if sprite.animation != ("walk" if vel_alvo != 0.0 else "floating"):
 			sprite.play("walk" if vel_alvo != 0.0 else "floating")
 	else:
-		# No ar: suavização extra para parecer mais orgânico
-		flutuacao_vel_x = lerp(flutuacao_vel_x, vel_alvo, delta * 2.0)
+		flutuacao_vel_x = lerp(flutuacao_vel_x, vel_alvo + ruido_offset * 0.4, delta * 2.0)
 		velocity.x = flutuacao_vel_x
 		var altura_alvo = altura_base_chao - 50.0 + flutuacao_offset
 		velocity.y = lerp(velocity.y, (altura_alvo - global_position.y) * 4.0, delta * 2.5)
@@ -244,7 +281,6 @@ func _estado_recuando(delta):
 	var dir    = sign(diff_x)
 	var dist_x = abs(diff_x)
 
-	# Recua oposto ao player com curva suave
 	flutuacao_vel_x = lerp(flutuacao_vel_x, -dir * SPEED_AR * 1.2, delta * 3.5)
 	velocity.x      = flutuacao_vel_x
 	var altura_alvo = altura_base_chao + ALTURA_FLUTUACAO + flutuacao_offset
@@ -273,15 +309,14 @@ func _estado_flutuando(delta):
 		estado_atual    = Estado.APROXIMANDO
 		return
 
-	# Balanço suave de espera
-	var balanco = sin(flutuacao_tempo * 0.7) * 15.0
+	# Balanço suave com ruido orgânico sobreposto
+	var balanco = sin(flutuacao_tempo * 0.7) * 15.0 + ruido_offset * 0.6
 	flutuacao_vel_x = lerp(flutuacao_vel_x, balanco, delta * 1.0)
 	velocity.x      = flutuacao_vel_x
 	var altura_alvo = altura_base_chao + ALTURA_FLUTUACAO + flutuacao_offset
 	velocity.y      = lerp(velocity.y, (altura_alvo - global_position.y) * 3.0, delta * 2.0)
 	if sprite.animation != "floating": sprite.play("floating")
 
-	# Desacelera antes de acabar o tempo
 	if timer_estado >= TEMPO_FLUTUANDO - 0.5:
 		flutuacao_vel_x = lerp(flutuacao_vel_x, 0.0, delta * 10.0)
 		velocity.x      = flutuacao_vel_x
@@ -319,11 +354,10 @@ func _preparar_ataque():
 	pode_atacar     = false
 	estado_atual    = Estado.ATACANDO
 	flutuacao_vel_x = 0.0
-	# Não zera velocity abruptamente — deixa desacelerar no _deriva
 	if is_instance_valid(player):
 		sprite.flip_h = (player.global_position.x - global_position.x) < 0
 
-# ── Checagem de hit corrigida (flip_h = true → olhando esquerda)
+# ── Checagem de hit ──────────────────────────────────────────
 func _checar_hit():
 	if not is_instance_valid(player) or is_dead or not is_attacking: return
 	var dx = player.global_position.x - global_position.x
@@ -334,7 +368,8 @@ func _checar_hit():
 		player.levar_dano_do_boss()
 
 func _encerrar_ataque(proximo_estado: int):
-	is_attacking = false
+	is_attacking        = false
+	revide_em_andamento = false
 	if is_dead: return
 	timer_estado = 0.0
 	estado_atual = proximo_estado
@@ -354,20 +389,19 @@ func espera_frame_especifico(frame_alvo):
 
 func executar_ataque_boss():
 	_preparar_ataque()
-	# Pequena pausa antes de atacar (antecipação)
-	await get_tree().create_timer(0.12).timeout
+	await get_tree().create_timer(randf_range(0.08, 0.18)).timeout
 	sprite.play("attack1")
 	sprite.frame = 0
 	await espera_frame_especifico(4)
 	_checar_hit()
-	await get_tree().create_timer(0.7).timeout
+	await get_tree().create_timer(randf_range(0.6, 0.85)).timeout
 	_encerrar_ataque(Estado.RECUANDO)
-	await get_tree().create_timer(COOLDOWN_NORMAL).timeout
+	await get_tree().create_timer(randf_range(COOLDOWN_NORMAL * 0.85, COOLDOWN_NORMAL * 1.15)).timeout
 	if not is_dead: pode_atacar = true
 
 func _executar_ataque_duplo():
 	_preparar_ataque()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(randf_range(0.07, 0.14)).timeout
 	for i in 2:
 		if is_dead or not is_attacking: break
 		sprite.play("attack1")
@@ -375,15 +409,15 @@ func _executar_ataque_duplo():
 		await espera_frame_especifico(4)
 		_checar_hit()
 		if i < 1:
-			await get_tree().create_timer(0.3).timeout
-	await get_tree().create_timer(0.55).timeout
+			await get_tree().create_timer(randf_range(0.25, 0.38)).timeout
+	await get_tree().create_timer(randf_range(0.45, 0.65)).timeout
 	_encerrar_ataque(Estado.RECUANDO)
-	await get_tree().create_timer(COOLDOWN_DUPLO).timeout
+	await get_tree().create_timer(randf_range(COOLDOWN_DUPLO * 0.85, COOLDOWN_DUPLO * 1.15)).timeout
 	if not is_dead: pode_atacar = true
 
 func _executar_recuo_invertido():
 	_preparar_ataque()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(randf_range(0.07, 0.15)).timeout
 	sprite.play("attack1")
 	sprite.frame = 0
 	await espera_frame_especifico(4)
@@ -395,7 +429,7 @@ func _executar_recuo_invertido():
 
 func _executar_ataque_triplo():
 	_preparar_ataque()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(randf_range(0.07, 0.13)).timeout
 	for i in 3:
 		if is_dead or not is_attacking: break
 		sprite.play("attack1")
@@ -403,10 +437,10 @@ func _executar_ataque_triplo():
 		await espera_frame_especifico(4)
 		_checar_hit()
 		if i < 2:
-			await get_tree().create_timer(0.25).timeout
-	await get_tree().create_timer(0.55).timeout
+			await get_tree().create_timer(randf_range(0.2, 0.3)).timeout
+	await get_tree().create_timer(randf_range(0.45, 0.65)).timeout
 	_encerrar_ataque(Estado.RECUANDO)
-	await get_tree().create_timer(COOLDOWN_TRIPLO).timeout
+	await get_tree().create_timer(randf_range(COOLDOWN_TRIPLO * 0.85, COOLDOWN_TRIPLO * 1.15)).timeout
 	if not is_dead: pode_atacar = true
 
 func _executar_flanqueamento():
@@ -422,7 +456,6 @@ func _executar_flanqueamento():
 	sprite.flip_h = dir < 0
 	if sprite.animation != "floating": sprite.play("floating")
 
-	# Aceleração progressiva até passar o player
 	var tempo = 0.0
 	while tempo < 0.4 and not is_dead and is_attacking:
 		var d = get_process_delta_time()
@@ -436,7 +469,6 @@ func _executar_flanqueamento():
 
 	if is_dead: return
 
-	# Vira e ataca
 	sprite.flip_h   = not sprite.flip_h
 	flutuacao_vel_x = 0.0
 	velocity.x      = 0.0
@@ -451,9 +483,9 @@ func _executar_flanqueamento():
 		if player_na_frente and abs(dx) <= ATTACK_HIT_RANGE_X and abs(dy) <= ATTACK_HIT_RANGE_Y:
 			player.levar_dano_do_boss()
 
-	await get_tree().create_timer(0.55).timeout
+	await get_tree().create_timer(randf_range(0.45, 0.65)).timeout
 	_encerrar_ataque(Estado.RECUANDO)
-	await get_tree().create_timer(COOLDOWN_NORMAL).timeout
+	await get_tree().create_timer(randf_range(COOLDOWN_NORMAL * 0.85, COOLDOWN_NORMAL * 1.15)).timeout
 	if not is_dead: pode_atacar = true
 
 func _executar_arco_aereo():
@@ -469,7 +501,6 @@ func _executar_arco_aereo():
 	var altura_arco = altura_base_chao + ALTURA_FLUTUACAO - 60.0
 	if sprite.animation != "floating": sprite.play("floating")
 
-	# Sobe em arco
 	var tempo = 0.0
 	while tempo < 0.5 and not is_dead and is_attacking:
 		var d = get_process_delta_time()
@@ -482,7 +513,6 @@ func _executar_arco_aereo():
 
 	if is_dead: return
 
-	# Mergulha em direção ao player
 	tempo = 0.0
 	while tempo < 0.5 and not is_dead and is_attacking:
 		var d = get_process_delta_time()
@@ -512,12 +542,146 @@ func _executar_arco_aereo():
 
 	await get_tree().create_timer(0.55).timeout
 	_encerrar_ataque(Estado.RECUANDO)
-	await get_tree().create_timer(COOLDOWN_ARCO).timeout
+	await get_tree().create_timer(randf_range(COOLDOWN_ARCO * 0.85, COOLDOWN_ARCO * 1.15)).timeout
 	if not is_dead: pode_atacar = true
 
 # ═══════════════════════════════════════════════════════════════
+# ── REVIDE (chamado quando boss leva 3 hits num combo) ───────
+# ═══════════════════════════════════════════════════════════════
+
+func _executar_revide():
+	if is_dead or revide_em_andamento: return
+	revide_em_andamento = true
+	pode_atacar         = false
+	is_taking_damage    = false   # cancela stun se ainda estava em curso
+
+	# Sorteio: flanquear (mais punitivo) ou duplo agressivo
+	var escolha = ["flanquear_revide", "duplo_agressivo"][randi() % 2]
+	if health <= 4:
+		escolha = "triplo_revide"   # modo fúria: sempre triplo
+
+	ultimo_ataque = escolha
+	match escolha:
+		"flanquear_revide":  _revide_flanquear()
+		"duplo_agressivo":   _revide_duplo_agressivo()
+		"triplo_revide":     _revide_triplo()
+
+func _revide_flanquear():
+	# Igual ao flanquear normal mas SEM pausa de antecipação (burst imediato)
+	_preparar_ataque()
+	if not is_instance_valid(player) or is_dead:
+		revide_em_andamento = false
+		_encerrar_ataque(Estado.RECUANDO)
+		await get_tree().create_timer(0.3).timeout
+		if not is_dead: pode_atacar = true
+		return
+
+	var diff_x = player.global_position.x - global_position.x
+	var dir    = sign(diff_x)
+	sprite.flip_h = dir < 0
+	sprite.play("floating")
+
+	var tempo = 0.0
+	while tempo < 0.35 and not is_dead and is_attacking:
+		var d = get_process_delta_time()
+		flutuacao_vel_x = lerp(flutuacao_vel_x, dir * SPEED_AVANCO * 1.1, d * 14.0)
+		velocity.x = flutuacao_vel_x
+		var altura_alvo = altura_base_chao - 40.0 + flutuacao_offset
+		velocity.y = lerp(velocity.y, (altura_alvo - global_position.y) * 5.0, d * 3.0)
+		move_and_slide()
+		await get_tree().process_frame
+		tempo += d
+
+	if is_dead:
+		revide_em_andamento = false
+		return
+
+	sprite.flip_h   = not sprite.flip_h
+	flutuacao_vel_x = 0.0
+	velocity.x      = 0.0
+	sprite.play("attack1")
+	sprite.frame = 0
+	await espera_frame_especifico(4)
+	if is_instance_valid(player) and not is_dead and is_attacking:
+		var dx = player.global_position.x - global_position.x
+		var dy = player.global_position.y - global_position.y
+		var olhando_direita  = not sprite.flip_h
+		var player_na_frente = (olhando_direita and dx > 0) or (not olhando_direita and dx < 0)
+		if player_na_frente and abs(dx) <= ATTACK_HIT_RANGE_X and abs(dy) <= ATTACK_HIT_RANGE_Y:
+			player.levar_dano_do_boss()
+
+	await get_tree().create_timer(0.55).timeout
+	revide_em_andamento = false
+	_encerrar_ataque(Estado.RECUANDO)
+	cooldown_global = 0.8
+	await get_tree().create_timer(COOLDOWN_NORMAL).timeout
+	if not is_dead: pode_atacar = true
+
+func _revide_duplo_agressivo():
+	_preparar_ataque()
+	# Sem pausa de antecipação — ataque imediato
+	for i in 2:
+		if is_dead or not is_attacking: break
+		sprite.play("attack1")
+		sprite.frame = 0
+		await espera_frame_especifico(4)
+		_checar_hit()
+		if i < 1:
+			await get_tree().create_timer(0.22).timeout
+	await get_tree().create_timer(0.5).timeout
+	revide_em_andamento = false
+	_encerrar_ataque(Estado.RECUANDO)
+	cooldown_global = 0.8
+	await get_tree().create_timer(COOLDOWN_DUPLO).timeout
+	if not is_dead: pode_atacar = true
+
+func _revide_triplo():
+	_preparar_ataque()
+	for i in 3:
+		if is_dead or not is_attacking: break
+		sprite.play("attack1")
+		sprite.frame = 0
+		await espera_frame_especifico(4)
+		_checar_hit()
+		if i < 2:
+			await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
+	revide_em_andamento = false
+	_encerrar_ataque(Estado.RECUANDO)
+	cooldown_global = 1.0
+	await get_tree().create_timer(COOLDOWN_TRIPLO).timeout
+	if not is_dead: pode_atacar = true
+
+# ═══════════════════════════════════════════════════════════════
+# ── DANO RECEBIDO ────────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════
+
+# Chame esta função ao invés de tomar_dano() quando o player acerta o boss.
+# Se já existe tomar_dano() sendo chamado externamente, adicione o registro
+# de combo dentro dela conforme abaixo.
+func registrar_hit_do_player():
+	if is_dead or cooldown_global > 0.0: return
+
+	hits_consecutivos += 1
+	timer_janela_hits  = 0.0   # reinicia a janela a cada novo hit
+
+	if hits_consecutivos >= HITS_PARA_REVIDAR:
+		hits_consecutivos  = 0
+		timer_janela_hits  = 0.0
+
+		if is_attacking:
+			# Marca para revidar assim que sair do ataque atual
+			revide_pendente = true
+		elif not revide_em_andamento:
+			revide_pendente = false
+			_executar_revide()
+
 func tomar_dano():
 	if is_dead or morte_em_andamento: return
+
+	# Registra para o sistema de revide
+	registrar_hit_do_player()
+
 	health -= 1
 	barra.atualizar_barra(health, 10)
 	if health <= 0:
@@ -528,7 +692,8 @@ func tomar_dano():
 	await get_tree().create_timer(0.08).timeout
 	if not is_dead: sprite.modulate = Color(1, 1, 1)
 
-	if not is_attacking and not is_taking_damage and not is_dead:
+	# Só entra no stun se NÃO estiver em revide
+	if not is_attacking and not is_taking_damage and not is_dead and not revide_em_andamento:
 		is_taking_damage = true
 		timer_estado     = 0.0
 		flutuacao_vel_x  = 0.0
@@ -545,14 +710,12 @@ func morrer():
 	is_attacking       = false
 	pode_atacar        = false
 	is_taking_damage   = false
+	revide_em_andamento = false
+	revide_pendente    = false
 	morte_em_andamento = true
 
-	# ── Mantém apenas colisão com o TileMap (layer 1 e 2 na mask)
-	# Remove layer própria para não interagir com outros
-	set_collision_layer_value(3, false)  # tira da layer do boss
-	# Mantém mask 1 e 2 para detectar o TileMap/chão
-	set_collision_mask_value(3, false)   # não precisa mais interagir com outros inimigos
-	# mask 1 e 2 já estavam ativas — o TileMap físico responde a elas
+	set_collision_layer_value(3, false)
+	set_collision_mask_value(3, false)
 
 	var tween = create_tween()
 	tween.tween_property(barra, "modulate:a", 0.0, 0.4)
@@ -561,7 +724,6 @@ func morrer():
 	velocity.x = 0.0
 	velocity.y = 0.0
 
-	# Aguarda pousar no TileMap com timeout de segurança
 	var t = 0
 	while not is_on_floor() and t < 300:
 		await get_tree().process_frame
