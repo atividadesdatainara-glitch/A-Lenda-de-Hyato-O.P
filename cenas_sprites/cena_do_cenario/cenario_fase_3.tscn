@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="2_m2k1j"]
 [ext_resource type="PackedScene" uid="uid://ct02k7cwnauxn" path="res://cenas_sprites/area_de_morte_fase_3/cena/area_de_morte.tscn" id="2_pltco"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_c00lf"]
+[ext_resource type="PackedScene" uid="uid://cxnihteohm2a6" path="res://cenas_sprites/inimigo_3/cenas/inimigo_3.tscn" id="9_2v7e5"]
+[ext_resource type="PackedScene" uid="uid://c4nerohs38i5u" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_3/cena/barreira_inimigo_3.tscn" id="10_8fujn"]
+[ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="11_hsxa3"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_3j8fj"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_44lko"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_0rbtq"]
@@ -1047,7 +1050,7 @@ tile_set = SubResource("TileSet_1k2b4")
 position = Vector2(111, 172)
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("2_m2k1j")]
-position = Vector2(2161, -7)
+position = Vector2(2138, 30)
 
 [node name="camera" parent="Player" unique_id=487859855 instance=ExtResource("12_3j8fj")]
 position = Vector2(1, 0)
@@ -1111,3 +1114,12 @@ position = Vector2(1, -164)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("16_8v2c5")
 centered = false
+
+[node name="Inimigo 3" parent="." unique_id=476643638 instance=ExtResource("9_2v7e5")]
+position = Vector2(2631, 23)
+
+[node name="barreira_inimigo_3" parent="." unique_id=1700755831 instance=ExtResource("10_8fujn")]
+position = Vector2(2316, 30)
+
+[node name="Checkpoint" parent="." unique_id=604722356 instance=ExtResource("11_hsxa3")]
+position = Vector2(2177, 40)
