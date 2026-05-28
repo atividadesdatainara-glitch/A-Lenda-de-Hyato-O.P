@@ -1,8 +1,12 @@
-[gd_scene format=4 uid="uid://bqfy1eaxxlni6"]
+[gd_scene format=4 uid="uid://sg7yk6yvd1rk"]
 
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="2_m2k1j"]
 [ext_resource type="PackedScene" uid="uid://ct02k7cwnauxn" path="res://cenas_sprites/area_de_morte_fase_3/cena/area_de_morte.tscn" id="2_pltco"]
+[ext_resource type="Script" uid="uid://c5lxuii1aacdi" path="res://scripts/goal/transition.gd" id="3_8fujn"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_c00lf"]
+[ext_resource type="Shader" uid="uid://brit2vnofwe8b" path="res://shaders/transicao.gdshader" id="4_hsxa3"]
+[ext_resource type="Script" uid="uid://b3j5hkom75ski" path="res://scripts/goal/color_rect.gd" id="5_rlrby"]
+[ext_resource type="PackedScene" uid="uid://y22sf7o554p3" path="res://cenas_sprites/goal/goal-3.tscn" id="6_k4qye"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_3j8fj"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_44lko"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_0rbtq"]
@@ -687,6 +691,13 @@ texture = ExtResource("3_c00lf")
 [sub_resource type="TileSet" id="TileSet_1k2b4"]
 sources/0 = SubResource("TileSetAtlasSource_lj633")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpmve"]
+shader = ExtResource("4_hsxa3")
+shader_parameter/lines = 10.0
+shader_parameter/threshold = 0.0
+shader_parameter/line_color_a = Color(1, 1, 1, 1)
+shader_parameter/line_color_b = Color(0, 0, 0, 1)
+
 [node name="cenario_inimigo2" type="TileMapLayer" unique_id=630549976]
 tile_set = SubResource("TileSet_x518h")
 metadata/_edit_horizontal_guides_ = [-360.0]
@@ -717,15 +728,34 @@ tile_set = SubResource("TileSet_1k2b4")
 [node name="area_de_morte" parent="." unique_id=1503673010 instance=ExtResource("2_pltco")]
 position = Vector2(111, 172)
 
+[node name="goal" type="Node2D" parent="." unique_id=819032506]
+
+[node name="transition" type="CanvasLayer" parent="goal" unique_id=1738658901]
+script = ExtResource("3_8fujn")
+
+[node name="color_rect" type="ColorRect" parent="goal/transition" unique_id=1574792060]
+material = SubResource("ShaderMaterial_wpmve")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_rlrby")
+
+[node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("6_k4qye")]
+position = Vector2(2336, 32)
+
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("2_m2k1j")]
 position = Vector2(2161, -7)
 
-[node name="camera" parent="." unique_id=487859855 instance=ExtResource("12_3j8fj")]
+[node name="camera" parent="." unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("12_3j8fj")]
 position = Vector2(2162, -7)
 limit_left = 12
 limit_top = -239
 limit_right = 10000048
 limit_bottom = 129
+player = NodePath("../Player")
 room_position = Vector2(-300, 0)
 room_size = Vector2(4000, 1080)
 
