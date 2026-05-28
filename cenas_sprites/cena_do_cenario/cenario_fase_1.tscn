@@ -3,7 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://de375040cbxb8" path="res://cenas_sprites/area_de_morte/cena/area_de_morte.tscn" id="3_0ya61"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="3_apho0"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_bqmhv"]
+[ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="10_0ya61"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_bxft1"]
+[ext_resource type="PackedScene" uid="uid://c06bvxg64i2n0" path="res://cenas_sprites/inimigo_1/cena/inimigo_1.tscn" id="11_bxft1"]
+[ext_resource type="PackedScene" uid="uid://cw1t8drw2uwpy" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_1/cena/barreira_inimigo_1.tscn" id="12_bxft1"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="13_2q6g4"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_3hfux"]
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="14_xdk6v"]
@@ -978,7 +981,7 @@ tile_set = SubResource("TileSet_3x86c")
 position = Vector2(1108, 182.66667)
 
 [node name="Player" parent="." unique_id=2051129159 groups=["Player"] instance=ExtResource("3_apho0")]
-position = Vector2(51, 62)
+position = Vector2(1676, -99)
 
 [node name="camera" parent="Player" unique_id=487859855 groups=["Player", "player"] instance=ExtResource("13_2q6g4")]
 position = Vector2(1, 0)
@@ -1040,3 +1043,12 @@ position = Vector2(1, -164)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("16_yodk6")
 centered = false
+
+[node name="Checkpoint" parent="." unique_id=604722356 instance=ExtResource("10_0ya61")]
+position = Vector2(1842, -89)
+
+[node name="Inimigo 1" parent="." unique_id=2142985082 instance=ExtResource("11_bxft1")]
+position = Vector2(2450, -125)
+
+[node name="barreira_inimigo_1" parent="." unique_id=1700755831 instance=ExtResource("12_bxft1")]
+position = Vector2(2181, -129)

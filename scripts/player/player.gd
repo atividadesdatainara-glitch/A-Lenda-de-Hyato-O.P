@@ -4,8 +4,8 @@ const SPEED = 200
 const JUMP_VELOCITY = -320
 const DASH_SPEED = 550
 
-const ATTACK_RANGE_X = 80.0  # alcance horizontal do ataque
-const ATTACK_RANGE_Y = 50.0  # tolerância vertical
+const ATTACK_RANGE_X = 80.0  
+const ATTACK_RANGE_Y = 50.0  
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
@@ -20,17 +20,13 @@ var player_health = 10
 var player_is_dead = false
 var boss_hit_count = 0
 
-# --- SISTEMA DE CHECKPOINT ---
 var checkpoint_atual: Vector2
-
-# --- SISTEMA DE RESPAWN GLOBAL ---
 var posicao_inicial_fase: Vector2
 
 @onready var sprite = $AnimatedSprite2D
 @onready var barra = $lifebar
 
 func _ready():
-	# Define a posição onde o jogador inicia o mapa como o primeiro checkpoint
 	checkpoint_atual = global_position
 	posicao_inicial_fase = global_position
 
@@ -57,7 +53,7 @@ func _physics_process(delta):
 		if combo_reset_timer >= COMBO_RESET_TEMPO:
 			combo_count = 0
 			combo_reset_timer = 0.0
-#----
+
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_attacking:
@@ -72,7 +68,6 @@ func _physics_process(delta):
 
 	elif Input.is_action_just_pressed("attack_heavy") and is_on_floor():
 		iniciar_sequencia_ataque("pesado")
-		#------
 
 	if direction != 0 and not is_attacking:
 		velocity.x = direction * SPEED
@@ -147,7 +142,6 @@ func executar_ataque(anim_name):
 		
 		var looking_right = not sprite.flip_h
 
-		# Inimigos comuns
 		var inimigos = get_tree().get_nodes_in_group("inimigos")
 		for inimigo in inimigos:
 			if not is_instance_valid(inimigo): continue
@@ -159,7 +153,6 @@ func executar_ataque(anim_name):
 				if inimigo.has_method("tomar_dano"):
 					inimigo.tomar_dano()
 
-		# Boss
 		var bosses = get_tree().get_nodes_in_group("boss")
 		for boss in bosses:
 			if not is_instance_valid(boss): continue
@@ -179,13 +172,11 @@ func espera_frame_player(frame_alvo, anim_atual):
 	while is_instance_valid(sprite) and sprite.animation == anim_atual and sprite.frame < frame_alvo and is_attacking:
 		await get_tree().process_frame
 
-# Chamado por inimigos comuns
-# Função principal de dano (Inimigo)
 func levar_dano_do_inimigo():
 	if player_is_dead or is_dashing or is_taking_damage: return
 	
 	player_health -= 1
-	barra.atualizar_barra(player_health, 10) # Atualiza a barra de vida
+	barra.atualizar_barra(player_health, 10)
 	
 	is_taking_damage = true 
 	is_attacking = false 
@@ -200,59 +191,65 @@ func levar_dano_do_inimigo():
 	velocity.x = knockback_dir * 300 
 	velocity.y = -100 
 	
-	# Aguarda a animação de sofrer dano acabar
 	if sprite.animation == "hurt":
 		await sprite.animation_finished
 	
 	is_taking_damage = false 
 
-# Chamado pelo boss - Agora ele apenas executa a função acima
 func levar_dano_do_boss():
 	levar_dano_do_inimigo()
 
 func player_morrer():
 	player_is_dead = true
-	set_physics_process(false) # Desliga a física para evitar bugs na queda enquanto morre
+	set_physics_process(false)
 	velocity = Vector2.ZERO
 	sprite.play("death")
 	
-	# Espera a animação de morte que você já tinha terminar
 	await sprite.animation_finished 
-	
-	# Uma pausa dramática de 0.5 segundos com ele caído no chão
 	await get_tree().create_timer(0.5).timeout
 	
-	# Restaura a vida do player para 100% e atualiza a barra
 	player_health = 10
 	barra.atualizar_barra(player_health, 10)
 	
-	# TELEPORTA de volta para o ponto de início do mapa
-	global_position = posicao_inicial_fase
-	
-	# Reseta o checkpoint atual para o início também (assim limpa o da árvore)
-	checkpoint_atual = posicao_inicial_fase
-	
-	# Coloca o player na animação padrão de pé
+	if checkpoint_atual != Vector2.ZERO:
+		global_position = checkpoint_atual
+	else:
+		global_position = posicao_inicial_fase
+		
 	sprite.play("idle")
 	
-	# Tira o estado de morto e religa os controles/física do jogo
+	is_taking_damage = false
+	is_attacking = false
+	is_dashing = false
+	
+	var fase = get_tree().current_scene
+	
+	# Reset do Boss 1 e Barreira 1
+	var barreira1 = fase.find_child("barreira_inimigo_1", true, false)
+	if barreira1 and barreira1.has_method("resetar_barreira"):
+		barreira1.resetar_barreira()
+	var boss1 = fase.find_child("Inimigo 1", true, false)
+	if not boss1: boss1 = fase.get_node_or_null("Inimigo 1")
+	if boss1 and boss1.has_method("resetar_boss"):
+		boss1.resetar_boss()
+
+	# Reset do Boss 2 e Barreira 2
+	var barreira2 = fase.find_child("barreira_inimigo_2", true, false)
+	if barreira2 and barreira2.has_method("resetar_barreira"):
+		barreira2.resetar_barreira()
+	var boss2 = fase.find_child("Inimigo 2", true, false)
+	if not boss2: boss2 = fase.get_node_or_null("Inimigo 2")
+	if boss2 and boss2.has_method("resetar_boss"):
+		boss2.resetar_boss()
+
 	player_is_dead = false
 	set_physics_process(true)
 
-# --- NOVAS FUNÇÕES DO SISTEMA DE CHECKPOINT E AGUA ---
-
-# Chamada pelo script do Checkpoint invisível para salvar a posição
 func definir_novo_checkpoint(nova_posicao: Vector2):
 	checkpoint_atual = nova_posicao
 
-# Chamada quando entra na Area2D da água
-# Função chamada quando o player cai na água
 func cair_na_agua():
 	if player_is_dead: return
-	
-	# Zera a vida imediatamente na barra para o jogador ver o dano
 	player_health = 0
 	barra.atualizar_barra(player_health, 10)
-	
-	# Chama diretamente a função que você já testou e deu certo!
 	player_morrer()

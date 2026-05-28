@@ -299,7 +299,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l1fi"]
 size = Vector2(27, 49)
 
-[node name="inimigo_3" type="CharacterBody2D" unique_id=476643638]
+[node name="Inimigo 3" type="CharacterBody2D" unique_id=476643638]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_cfvu7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=285377833]
