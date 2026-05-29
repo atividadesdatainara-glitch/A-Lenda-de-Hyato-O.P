@@ -743,7 +743,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_rlrby")
 
-[node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("6_k4qye")]
+[node name="goal-2" parent="goal" unique_id=492563005 groups=["Player", "player"] instance=ExtResource("6_k4qye")]
 position = Vector2(2336, 32)
 
 [node name="Player" parent="." unique_id=2051129159 instance=ExtResource("2_m2k1j")]

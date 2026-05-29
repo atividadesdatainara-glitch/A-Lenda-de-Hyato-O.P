@@ -994,7 +994,7 @@ scale = Vector2(0.75, 0.75)
 
 [node name="goal" type="Node2D" parent="." unique_id=1168701704]
 
-[node name="transition" type="CanvasLayer" parent="goal" unique_id=299274341]
+[node name="transition" type="CanvasLayer" parent="goal" unique_id=299274341 groups=["Player", "player"]]
 script = ExtResource("4_o4p3e")
 
 [node name="color_rect" type="ColorRect" parent="goal/transition" unique_id=1977282637]
