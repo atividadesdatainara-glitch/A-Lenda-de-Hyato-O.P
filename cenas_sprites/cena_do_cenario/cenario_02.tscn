@@ -742,7 +742,6 @@ tile_set = SubResource("TileSet_31ole")
 [node name="parallax" type="Node2D" parent="." unique_id=467397499]
 
 [node name="Parallax" type="ParallaxBackground" parent="parallax" unique_id=267700582]
-visible = false
 
 [node name="4" type="ParallaxLayer" parent="parallax/Parallax" unique_id=968144585]
 position = Vector2(-8, 0)
@@ -795,7 +794,8 @@ centered = false
 [node name="goal" type="Node2D" parent="." unique_id=2000270528]
 
 [node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("12_bitk3")]
-next_level = "res://cenas_sprites/cena_do_cenario/cenario_3.tscn"
+position = Vector2(2248, 72)
+next_level = "res://cenas_sprites/cena_do_cenario/cenario_03.tscn"
 
 [node name="transition" type="CanvasLayer" parent="goal" unique_id=23768351 groups=["Player", "player"]]
 script = ExtResource("4_bitk3")

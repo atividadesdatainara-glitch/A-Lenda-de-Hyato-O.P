@@ -1061,7 +1061,7 @@ script = ExtResource("6_w77w8")
 metadata/_edit_use_anchors_ = true
 
 [node name="goal-1" parent="goal" unique_id=492563005 instance=ExtResource("7_f45k0")]
-position = Vector2(1776, -96)
+position = Vector2(2592, -96)
 next_level = "res://cenas_sprites/cena_do_cenario/cenario_02.tscn"
 
 [node name="checkpoint" type="Node2D" parent="." unique_id=2106476608]
@@ -1082,13 +1082,14 @@ position = Vector2(339, -40)
 position = Vector2(1677, -99)
 
 [node name="camera" parent="player_camera" unique_id=487859855 node_paths=PackedStringArray("player") groups=["Player", "player"] instance=ExtResource("16_jnj5m")]
+position = Vector2(-1445, 59)
 limit_left = 2
 limit_top = -240
 limit_right = 10000038
 limit_bottom = 114
 player = NodePath("../Player")
 room_position = Vector2(-300, 0)
-room_size = Vector2(3000, 1080)
+room_size = Vector2(3500, 1080)
 
 [node name="Player" parent="player_camera" unique_id=2051129159 groups=["Player"] instance=ExtResource("8_v2nww")]
-position = Vector2(-1, 0)
+position = Vector2(-1605, 163)
