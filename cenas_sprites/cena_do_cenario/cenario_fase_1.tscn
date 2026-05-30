@@ -4,9 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="3_apho0"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_bqmhv"]
 [ext_resource type="PackedScene" uid="uid://bp4lsnmhejccb" path="res://cenas_sprites/goal/goal-1.tscn" id="4_0ya61"]
-[ext_resource type="Shader" uid="uid://brit2vnofwe8b" path="res://shaders/transicao.gdshader" id="4_bxft1"]
-[ext_resource type="Script" uid="uid://c5lxuii1aacdi" path="res://scripts/goal/transition.gd" id="4_o4p3e"]
-[ext_resource type="Script" uid="uid://b3j5hkom75ski" path="res://scripts/goal/color_rect.gd" id="5_o4p3e"]
+[ext_resource type="PackedScene" uid="uid://biq7pknog42q7" path="res://cenas_sprites/goal/transition_1.tscn" id="4_gc0ev"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_bxft1"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="13_2q6g4"]
 [ext_resource type="Texture2D" uid="uid://c66kuywouo0k4" path="res://assets/parallax/DarkForest_Background.png" id="13_3hfux"]
@@ -939,13 +937,6 @@ texture = ExtResource("3_bqmhv")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7ryus")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2rml"]
-shader = ExtResource("4_bxft1")
-shader_parameter/lines = 10.0
-shader_parameter/threshold = 0.0
-shader_parameter/line_color_a = Color(1, 1, 1, 1)
-shader_parameter/line_color_b = Color(0, 0, 0, 1)
-
 [node name="cenario_inimigo1" type="TileMapLayer" unique_id=630549976]
 tile_set = SubResource("TileSet_x518h")
 metadata/_edit_horizontal_guides_ = [-360.0]
@@ -992,22 +983,11 @@ scale = Vector2(0.75, 0.75)
 
 [node name="check_pointis" type="Node2D" parent="." unique_id=304851279]
 
-[node name="goal" type="Node2D" parent="." unique_id=1168701704]
+[node name="goal2" parent="." unique_id=1707144944 instance=ExtResource("4_gc0ev")]
 
-[node name="transition" type="CanvasLayer" parent="goal" unique_id=299274341 groups=["Player", "player"]]
-script = ExtResource("4_o4p3e")
+[node name="goal" parent="goal2" unique_id=404487942 instance=ExtResource("4_gc0ev")]
 
-[node name="color_rect" type="ColorRect" parent="goal/transition" unique_id=1977282637]
-material = SubResource("ShaderMaterial_v2rml")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("5_o4p3e")
-
-[node name="goal-1" parent="goal" unique_id=492563005 instance=ExtResource("4_0ya61")]
+[node name="goal-1" parent="goal2/goal" unique_id=492563005 instance=ExtResource("4_0ya61")]
 position = Vector2(2240, -88)
 next_level = "res://cenas_sprites/cena_do_cenario/cenario_fase_2.tscn"
 

@@ -3,9 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://crc1ic6iy6t3" path="res://cenas_sprites/area_de_morte_fase_2/cena/area_de_morte.tscn" id="3_qjqq7"]
 [ext_resource type="Texture2D" uid="uid://bjd5ctpwd7ivl" path="res://assets/tilesets/elementos_diversos/elemento_do_mapa.png" id="3_rs6jl"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="4_4dgcl"]
-[ext_resource type="Script" uid="uid://c5lxuii1aacdi" path="res://scripts/goal/transition.gd" id="4_14tpq"]
-[ext_resource type="Shader" uid="uid://brit2vnofwe8b" path="res://shaders/transicao.gdshader" id="5_dqewm"]
-[ext_resource type="Script" uid="uid://b3j5hkom75ski" path="res://scripts/goal/color_rect.gd" id="6_7ml40"]
+[ext_resource type="PackedScene" uid="uid://biq7pknog42q7" path="res://cenas_sprites/goal/transition_1.tscn" id="4_xjfoj"]
 [ext_resource type="PackedScene" uid="uid://6mhspl65gxbf" path="res://cenas_sprites/goal/goal-2.tscn" id="7_14tpq"]
 [ext_resource type="Texture2D" uid="uid://dlq3xwh4t055t" path="res://assets/tilesets/armadilhas/espinhos.png" id="10_nmts4"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="12_v6pyl"]
@@ -702,13 +700,6 @@ texture = ExtResource("10_nmts4")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_o4p3e")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jcnrc"]
-shader = ExtResource("5_dqewm")
-shader_parameter/lines = 10.0
-shader_parameter/threshold = 0.0
-shader_parameter/line_color_a = Color(1, 1, 1, 1)
-shader_parameter/line_color_b = Color(0, 0, 0, 1)
-
 [node name="cenario_inimigo2" type="TileMapLayer" unique_id=630549976]
 tile_set = SubResource("TileSet_x518h")
 metadata/_edit_horizontal_guides_ = [-360.0]
@@ -745,20 +736,7 @@ position = Vector2(325, 105)
 
 [node name="goal" type="Node2D" parent="." unique_id=991444581]
 
-[node name="transition" type="CanvasLayer" parent="goal" unique_id=424850933]
-visible = false
-script = ExtResource("4_14tpq")
-
-[node name="color_rect" type="ColorRect" parent="goal/transition" unique_id=2074970102]
-visible = false
-material = SubResource("ShaderMaterial_jcnrc")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("6_7ml40")
+[node name="goal" parent="goal" unique_id=1707144944 instance=ExtResource("4_xjfoj")]
 
 [node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("7_14tpq")]
 position = Vector2(1880, 64)
