@@ -25,6 +25,7 @@ var posicao_inicial_fase: Vector2
 
 @onready var sprite = $AnimatedSprite2D
 @onready var barra = $lifebar
+@onready var dashbar = $dashbar
 
 func _ready():
 	checkpoint_atual = global_position
@@ -89,6 +90,10 @@ func executar_dash():
 	is_dashing = true
 	pode_dar_dash = false
 	
+	# Chama a animação da barra: 0.2s esvaziando e 1.0s recarregando
+	if dashbar:
+		dashbar.iniciar_cooldown(0.2, 1.0)
+	
 	sprite.modulate.a = 0.5
 	if sprite.sprite_frames.has_animation("dash"):
 		sprite.play("dash")
@@ -111,7 +116,7 @@ func executar_dash():
 	
 	await get_tree().create_timer(1.0).timeout 
 	pode_dar_dash = true
-
+	
 func iniciar_sequencia_ataque(tipo):
 	if is_attacking or is_taking_damage: return
 	

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://3g4mtmul7xj"]
+
+[ext_resource type="Texture2D" uid="uid://cuvsrbehjiaji" path="res://cenas_sprites/dashbar/sprites/sprite1.png" id="1_jjgyo"]
+[ext_resource type="Texture2D" uid="uid://m4udb1fnlnti" path="res://cenas_sprites/dashbar/sprites/sprite2.png" id="2_coly6"]
+[ext_resource type="Texture2D" uid="uid://cj54pqr1oqbjv" path="res://cenas_sprites/dashbar/sprites/sprite3.png" id="3_ofiv0"]
+[ext_resource type="Script" uid="uid://ikbv20gebpp6" path="res://scripts/dashbar/dashbar.gd" id="4_coly6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxqx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jjgyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_coly6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ofiv0")
+}],
+"loop": false,
+"name": &"dashbar",
+"speed": 5.0
+}]
+
+[node name="dashbar" type="AnimatedSprite2D" unique_id=1641801894]
+sprite_frames = SubResource("SpriteFrames_lxqx2")
+animation = &"dashbar"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("4_coly6")
