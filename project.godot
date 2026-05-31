@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Alenda de Hyato"
-run/main_scene="uid://dg062kvb37vpk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [global_group]
