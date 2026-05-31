@@ -1121,5 +1121,8 @@ position = Vector2(2631, 23)
 [node name="barreira_inimigo_3" parent="." unique_id=1700755831 instance=ExtResource("10_8fujn")]
 position = Vector2(2316, 30)
 
+[node name="barreira_inimigo_3_2" parent="." unique_id=562613647 instance=ExtResource("10_8fujn")]
+position = Vector2(2957, 27)
+
 [node name="Checkpoint" parent="." unique_id=604722356 instance=ExtResource("11_hsxa3")]
 position = Vector2(2177, 40)
