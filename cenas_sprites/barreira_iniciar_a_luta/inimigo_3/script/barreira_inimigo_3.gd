@@ -1,4 +1,5 @@
 extends Area2D
+
 var ativado : bool = false
 @onready var gatilho = $CollisionShape2D
 @onready var player = get_tree().current_scene.find_child("Player", true, false)
@@ -9,31 +10,38 @@ func _physics_process(_delta):
 		ativar_bloqueio()
 
 func colocar_parede():
-	# Parede para o player
-	var nova_parede = StaticBody2D.new()
-	nova_parede.name = "ParedeCriadaFisica"
-	var formato_colisao = CollisionShape2D.new()
-	formato_colisao.shape = gatilho.shape
-	nova_parede.add_child(formato_colisao)
-	add_child(nova_parede)
+	var cena_atual = get_tree().current_scene
+
+	# Cria UMA única parede física universal
+	var parede_universal = StaticBody2D.new()
+	# Usa o nome do próprio nó da barreira para evitar que as paredes de outros chefes conflitem
+	parede_universal.name = "ParedeInvisivelArena_" + self.name
 	
-	# Parede para o boss (mesma posição, layer diferente)
-	var parede_boss = StaticBody2D.new()
-	parede_boss.name = "ParedeBoss"
-	parede_boss.collision_layer = 4   # layer 3 — ajusta se necessário
-	parede_boss.collision_mask = 4    # bloqueia quem estiver na layer 3
-	var formato_boss = CollisionShape2D.new()
-	formato_boss.shape = gatilho.shape
-	parede_boss.add_child(formato_boss)
-	add_child(parede_boss)
+	# Ativa as camadas de 1 a 4. Isso garante que bloqueia Player (1) e Boss (3)
+	for i in range(1, 5):
+		parede_universal.set_collision_layer_value(i, true)
 	
+	# Paredes estáticas não precisam rastrear máscaras (pode zerar todas)
+	for i in range(1, 5):
+		parede_universal.set_collision_mask_value(i, false)
+	
+	# Configura o formato baseado no seu gatilho do editor
+	var formato = CollisionShape2D.new()
+	formato.shape = gatilho.shape
+	formato.global_position = gatilho.global_position
+	
+	parede_universal.add_child(formato)
+	cena_atual.add_child(parede_universal) # Adiciona na raiz para estabilidade total
+
 func ativar_bloqueio():
 	ativado = true
 	colocar_parede()
+	
 	var fase_atual = get_tree().current_scene
 	var boss = fase_atual.find_child("Inimigo 3", true, false)
 	if not boss:
 		boss = fase_atual.get_node_or_null("Inimigo 3")
+		
 	if boss and boss.has_method("surgir_na_arena"):
 		boss.surgir_na_arena()
 	else:
@@ -42,11 +50,11 @@ func ativar_bloqueio():
 
 func resetar_barreira():
 	ativado = false
-	var parede_velha = get_node_or_null("ParedeCriadaFisica")
-	if parede_velha:
-		parede_velha.free()
-	var parede_boss = get_node_or_null("ParedeBoss")
-	if parede_boss:
-		parede_boss.free()
-	set_physics_process(true)
+	var cena_atual = get_tree().current_scene
 	
+	# Procura especificamente a parede criada por ESTA barreira
+	var parede = cena_atual.get_node_or_null("ParedeInvisivelArena_" + self.name)
+	if parede:
+		parede.queue_free() # queue_free() evita crashes durante a simulação física
+		
+	set_physics_process(true)
