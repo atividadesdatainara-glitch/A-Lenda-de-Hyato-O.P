@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cxnihteohm2a6" path="res://cenas_sprites/inimigo_3/cenas/inimigo_3.tscn" id="7_a10m6"]
 [ext_resource type="PackedScene" uid="uid://c4nerohs38i5u" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_3/cena/barreira_inimigo_3.tscn" id="8_hwsk3"]
 [ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="9_8i86y"]
+[ext_resource type="PackedScene" uid="uid://y22sf7o554p3" path="res://cenas_sprites/goal/goal-3.tscn" id="9_f8ka1"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="10_64n2j"]
+[ext_resource type="Script" uid="uid://dy50ovn1elj16" path="res://scripts/goal/final/transition_final.gd" id="10_csjnu"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="11_3k3tp"]
+[ext_resource type="Shader" uid="uid://bfok5aj0kw12o" path="res://shaders/final.gdshader" id="11_6y1r6"]
+[ext_resource type="Script" uid="uid://duvm8h3bktoqm" path="res://scripts/goal/final/color_rect.gd" id="12_a10m6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhp3d"]
 texture = ExtResource("1_6vlba")
@@ -700,6 +704,11 @@ texture = ExtResource("1_6vlba")
 [sub_resource type="TileSet" id="TileSet_mekdg"]
 sources/0 = SubResource("TileSetAtlasSource_b1fgo")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwsk3"]
+shader = ExtResource("11_6y1r6")
+shader_parameter/threshold = 0.0
+shader_parameter/fade_color = Color(0, 0, 0, 1)
+
 [node name="cenario_3" type="Node2D" unique_id=1194876381]
 
 [node name="tile_map" type="Node2D" parent="." unique_id=617882262]
@@ -801,6 +810,26 @@ light_mask = 2
 visibility_layer = 5
 position = Vector2(2312, 16)
 
+[node name="goal" type="Node2D" parent="." unique_id=21578571]
+
+[node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("9_f8ka1")]
+position = Vector2(120, 16)
+next_level = "res://cenas_sprites/creditos/creditos_finais.tscn"
+
+[node name="transition" type="CanvasLayer" parent="goal" unique_id=1689741721 groups=["Player", "player"]]
+script = ExtResource("10_csjnu")
+
+[node name="color_rect" type="ColorRect" parent="goal/transition" unique_id=1397658463]
+material = SubResource("ShaderMaterial_hwsk3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("12_a10m6")
+metadata/_edit_use_anchors_ = true
+
 [node name="checkpoint" type="Node2D" parent="." unique_id=403741912]
 
 [node name="Checkpoint" parent="checkpoint" unique_id=604722356 instance=ExtResource("9_8i86y")]
@@ -819,4 +848,4 @@ room_position = Vector2(-300, 0)
 room_size = Vector2(4000, 1080)
 
 [node name="Player" parent="player_camera" unique_id=2051129159 instance=ExtResource("11_3k3tp")]
-position = Vector2(-2145, -24)
+position = Vector2(-2113, -24)

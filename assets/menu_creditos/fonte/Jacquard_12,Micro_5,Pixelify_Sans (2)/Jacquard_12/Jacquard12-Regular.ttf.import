@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://g21csg01lt34"
-path="res://.godot/imported/Micro5-Regular.ttf-a10640653af2680c281eb27fd2c714d6.fontdata"
+uid="uid://c2ydwfkncnjaf"
+path="res://.godot/imported/Jacquard12-Regular.ttf-438833c589b5c19892b45f657434c64b.fontdata"
 
 [deps]
 
-source_file="res://assets/menu/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Micro_5/Micro5-Regular.ttf"
-dest_files=["res://.godot/imported/Micro5-Regular.ttf-a10640653af2680c281eb27fd2c714d6.fontdata"]
+source_file="res://assets/menu_creditos/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Jacquard_12/Jacquard12-Regular.ttf"
+dest_files=["res://.godot/imported/Jacquard12-Regular.ttf-438833c589b5c19892b45f657434c64b.fontdata"]
 
 [params]
 

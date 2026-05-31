@@ -860,9 +860,10 @@ position = Vector2(1600, -56)
 [node name="player_camera" type="Node2D" parent="." unique_id=1408327854]
 
 [node name="Player" parent="player_camera" unique_id=2051129159 instance=ExtResource("8_0t5uu")]
-position = Vector2(29, -83)
+position = Vector2(1648, -80)
 
 [node name="camera" parent="player_camera" unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("16_31ole")]
+visible = false
 position = Vector2(30, -83)
 limit_left = 2
 limit_top = -240

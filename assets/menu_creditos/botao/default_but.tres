@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dow4rs831dn3c"]
 
-[ext_resource type="FontFile" uid="uid://g21csg01lt34" path="res://assets/menu/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Micro_5/Micro5-Regular.ttf" id="1_dcpfu"]
+[ext_resource type="FontFile" uid="uid://g21csg01lt34" path="res://assets/menu_creditos/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Micro_5/Micro5-Regular.ttf" id="1_dcpfu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1kha"]
 bg_color = Color(0.42147925, 0, 0.08121798, 1)
