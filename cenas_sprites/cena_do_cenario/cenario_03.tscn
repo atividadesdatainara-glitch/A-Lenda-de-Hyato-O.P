@@ -819,4 +819,4 @@ room_position = Vector2(-300, 0)
 room_size = Vector2(4000, 1080)
 
 [node name="Player" parent="player_camera" unique_id=2051129159 instance=ExtResource("11_3k3tp")]
-position = Vector2(-2145, -24)
+position = Vector2(-25, -16)
