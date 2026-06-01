@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c6qt2o00e5v0b" path="res://cenas_sprites/player/sprites/JUMP.png" id="9_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://c3nfvkwii0s6w" path="res://cenas_sprites/player/sprites/RUN.png" id="10_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://ctyhspteethhk" path="res://cenas_sprites/vida/cena/lifebar.tscn" id="11_dk11e"]
+[ext_resource type="PackedScene" uid="uid://3g4mtmul7xj" path="res://cenas_sprites/dashbar/cena/dashbar.tscn" id="12_dk11e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
 atlas = ExtResource("1_h17s1")
@@ -509,5 +510,11 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_5gtgg")
 
 [node name="lifebar" parent="." unique_id=1288583847 instance=ExtResource("11_dk11e")]
-position = Vector2(1.0000001, -21)
+position = Vector2(1, -25)
 scale = Vector2(0.20833337, 0.14062512)
+
+[node name="dashbar" parent="." unique_id=1641801894 instance=ExtResource("12_dk11e")]
+position = Vector2(-4.750001, -20)
+scale = Vector2(0.65277773, 0.6111111)
+frame = 0
+frame_progress = 0.0

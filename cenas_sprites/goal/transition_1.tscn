@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://biq7pknog42q7"]
+
+[ext_resource type="Script" uid="uid://c5lxuii1aacdi" path="res://scripts/goal/transition.gd" id="1_cq7tl"]
+[ext_resource type="Shader" uid="uid://brit2vnofwe8b" path="res://shaders/transicao.gdshader" id="2_l2t3a"]
+[ext_resource type="Script" uid="uid://b3j5hkom75ski" path="res://scripts/goal/color_rect.gd" id="3_67c2q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3ab3"]
+shader = ExtResource("2_l2t3a")
+shader_parameter/lines = 10.0
+shader_parameter/threshold = 0.0
+shader_parameter/line_color_a = Color(1, 1, 1, 1)
+shader_parameter/line_color_b = Color(0, 0, 0, 1)
+
+[node name="goal" type="Node2D" unique_id=1707144944]
+
+[node name="transition" type="CanvasLayer" parent="." unique_id=995854107 groups=["Player", "player"]]
+script = ExtResource("1_cq7tl")
+
+[node name="color_rect" type="ColorRect" parent="transition" unique_id=785317028]
+material = SubResource("ShaderMaterial_f3ab3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_67c2q")

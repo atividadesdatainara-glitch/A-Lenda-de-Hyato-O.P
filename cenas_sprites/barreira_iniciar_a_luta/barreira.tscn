@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://rgb3wotabff3"]
+
+[ext_resource type="Script" uid="uid://b30ix33ebbktr" path="res://scripts/bareira/barreira2.gd" id="1_ifrm1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51mfp"]
+size = Vector2(20, 282)
+
+[node name="Area2D" type="StaticBody2D" unique_id=1455828158]
+script = ExtResource("1_ifrm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1094185125]
+position = Vector2(0, -131)
+shape = SubResource("RectangleShape2D_51mfp")

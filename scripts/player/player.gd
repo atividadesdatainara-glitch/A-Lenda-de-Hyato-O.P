@@ -25,6 +25,7 @@ var posicao_inicial_fase: Vector2
 
 @onready var sprite = $AnimatedSprite2D
 @onready var barra = $lifebar
+@onready var dashbar = $dashbar
 
 func _ready():
 	checkpoint_atual = global_position
@@ -89,6 +90,10 @@ func executar_dash():
 	is_dashing = true
 	pode_dar_dash = false
 	
+	# Chama a animação da barra: 0.2s esvaziando e 1.0s recarregando
+	if dashbar:
+		dashbar.iniciar_cooldown(0.2, 1.0)
+	
 	sprite.modulate.a = 0.5
 	if sprite.sprite_frames.has_animation("dash"):
 		sprite.play("dash")
@@ -111,7 +116,7 @@ func executar_dash():
 	
 	await get_tree().create_timer(1.0).timeout 
 	pode_dar_dash = true
-
+	
 func iniciar_sequencia_ataque(tipo):
 	if is_attacking or is_taking_damage: return
 	
@@ -241,6 +246,17 @@ func player_morrer():
 	if not boss2: boss2 = fase.get_node_or_null("Inimigo 2")
 	if boss2 and boss2.has_method("resetar_boss"):
 		boss2.resetar_boss()
+		
+	# reset do boss 3 e barreira 3
+	# Reset do Boss 3 e Barreira 3
+	var barreira3 = fase.find_child("barreira_inimigo_3", true, false)
+	if barreira3 and barreira3.has_method("resetar_barreira"):
+		barreira3.resetar_barreira()
+		
+	var boss3 = fase.find_child("Inimigo 3", true, false)
+	if not boss3: boss3 = fase.get_node_or_null("Inimigo 3")
+	if boss3 and boss3.has_method("resetar_boss"):
+		boss3.resetar_boss()
 
 	player_is_dead = false
 	set_physics_process(true)

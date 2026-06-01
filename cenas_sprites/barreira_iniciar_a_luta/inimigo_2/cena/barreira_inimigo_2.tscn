@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://byc35ln4gmgpf" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_2/script/barreira_inimigo_2.gd" id="1_s2nea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yi44s"]
-size = Vector2(37, 100)
+size = Vector2(37, 218)
 
 [node name="barreira_inimigo_2" type="Area2D" unique_id=1700755831]
 disable_mode = 1
@@ -11,6 +11,7 @@ monitorable = false
 script = ExtResource("1_s2nea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470410873]
+position = Vector2(0, -59)
 shape = SubResource("RectangleShape2D_yi44s")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

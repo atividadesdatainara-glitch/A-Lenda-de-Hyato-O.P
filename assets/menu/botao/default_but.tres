@@ -1,0 +1,49 @@
+[gd_resource type="Theme" format=3 uid="uid://dow4rs831dn3c"]
+
+[ext_resource type="FontFile" uid="uid://g21csg01lt34" path="res://assets/menu/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Micro_5/Micro5-Regular.ttf" id="1_dcpfu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1kha"]
+bg_color = Color(0.42147925, 0, 0.08121798, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5294118, 0.13725491, 0.16470589, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3rbo"]
+bg_color = Color(0.42147925, 0, 0.08121798, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5294118, 0.13725491, 0.16470589, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoeyx"]
+bg_color = Color(0.24705882, 0.043137256, 0.05882353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5294118, 0.13725491, 0.16470589, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qaurf"]
+bg_color = Color(0.63430303, 0.029113147, 0.11982655, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.24705882, 0.043137256, 0.05882353, 1)
+
+[resource]
+Button/font_sizes/font_size = 39
+Button/fonts/font = ExtResource("1_dcpfu")
+Button/styles/focus = SubResource("StyleBoxFlat_p1kha")
+Button/styles/hover = SubResource("StyleBoxFlat_d3rbo")
+Button/styles/normal = SubResource("StyleBoxFlat_qoeyx")
+Button/styles/pressed = SubResource("StyleBoxFlat_qaurf")

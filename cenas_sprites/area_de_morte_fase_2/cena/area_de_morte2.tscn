@@ -1,16 +1,16 @@
-[gd_scene format=3 uid="uid://de375040cbxb8"]
+[gd_scene format=3 uid="uid://1hv7qxfmrbx4"]
 
-[ext_resource type="Script" uid="uid://dfwe88macexow" path="res://cenas_sprites/area_de_morte/script/area_de_morte.gd" id="1_argo0"]
+[ext_resource type="Script" uid="uid://hii7bjq1mjwc" path="res://cenas_sprites/area_de_morte_fase_2/script/area_de_morte.gd" id="1_pppyc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yj8yg"]
-size = Vector2(420, 24)
+size = Vector2(560, 16)
 
 [node name="area_de_morte" type="Area2D" unique_id=1503673010]
 collision_layer = 0
-script = ExtResource("1_argo0")
+script = ExtResource("1_pppyc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=314252669]
-position = Vector2(8, 0)
+position = Vector2(272, 8)
 shape = SubResource("RectangleShape2D_yj8yg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
