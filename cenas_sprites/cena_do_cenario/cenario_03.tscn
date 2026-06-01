@@ -735,7 +735,7 @@ tile_set = SubResource("TileSet_mekdg")
 position = Vector2(136, 176)
 
 [node name="area_de_morte2" parent="dano_de_queda" unique_id=1084555223 instance=ExtResource("2_f8ka1")]
-position = Vector2(1536, 160)
+position = Vector2(1848, 176)
 
 [node name="parallax" type="Node2D" parent="." unique_id=1060645983]
 
