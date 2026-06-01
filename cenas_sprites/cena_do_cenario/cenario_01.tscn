@@ -12,9 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="10_wmstr"]
 [ext_resource type="Texture2D" uid="uid://bqwvqhf4m1vbc" path="res://assets/parallax/DarkForest_Shadow.png" id="11_pytas"]
 [ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="12_b5xiu"]
+[ext_resource type="Script" uid="uid://bcwp7chlx2oge" path="res://scripts/bareira/barreira.gd" id="13_2gj53"]
 [ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="13_u0e5j"]
 [ext_resource type="PackedScene" uid="uid://c06bvxg64i2n0" path="res://cenas_sprites/inimigo_1/cena/inimigo_1.tscn" id="14_y1p22"]
 [ext_resource type="PackedScene" uid="uid://cw1t8drw2uwpy" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_1/cena/barreira_inimigo_1.tscn" id="15_2tspm"]
+[ext_resource type="PackedScene" uid="uid://rgb3wotabff3" path="res://cenas_sprites/barreira_iniciar_a_luta/barreira.tscn" id="16_2gj53"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="16_jnj5m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc65t"]
@@ -1097,6 +1099,7 @@ texture = ExtResource("12_b5xiu")
 centered = false
 
 [node name="goal" type="Node2D" parent="." unique_id=1635614155]
+visible = false
 
 [node name="transition" type="CanvasLayer" parent="goal" unique_id=2120883008 groups=["Player", "player"]]
 script = ExtResource("4_57ady")
@@ -1115,7 +1118,7 @@ script = ExtResource("6_w77w8")
 metadata/_edit_use_anchors_ = true
 
 [node name="goal-1" parent="goal" unique_id=492563005 instance=ExtResource("7_f45k0")]
-position = Vector2(2592, -96)
+position = Vector2(2688, -96)
 next_level = "res://cenas_sprites/cena_do_cenario/cenario_02.tscn"
 
 [node name="checkpoint" type="Node2D" parent="." unique_id=2106476608]
@@ -1125,12 +1128,19 @@ position = Vector2(1920, -88)
 
 [node name="inimigo" type="Node2D" parent="." unique_id=175510761]
 position = Vector2(1842, -89)
+script = ExtResource("13_2gj53")
 
 [node name="Inimigo 1" parent="inimigo" unique_id=2142985082 instance=ExtResource("14_y1p22")]
+visibility_layer = 5
 position = Vector2(608, -36)
 
 [node name="barreira_inimigo_1" parent="inimigo" unique_id=1700755831 instance=ExtResource("15_2tspm")]
 position = Vector2(339, -40)
+
+[node name="Area2D" parent="inimigo" unique_id=1455828158 node_paths=PackedStringArray("boss_da_fase", "premio_da_fase") instance=ExtResource("16_2gj53")]
+position = Vector2(742, 1)
+boss_da_fase = NodePath("../Inimigo 1")
+premio_da_fase = NodePath("../../goal")
 
 [node name="player_camera" type="Node2D" parent="." unique_id=978628698]
 position = Vector2(1677, -99)
@@ -1146,4 +1156,4 @@ room_position = Vector2(-300, 0)
 room_size = Vector2(3640, 1080)
 
 [node name="Player" parent="player_camera" unique_id=2051129159 groups=["Player"] instance=ExtResource("8_v2nww")]
-position = Vector2(-1605, 163)
+position = Vector2(75, 3)

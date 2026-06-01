@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cxnihteohm2a6" path="res://cenas_sprites/inimigo_3/cenas/inimigo_3.tscn" id="7_a10m6"]
 [ext_resource type="PackedScene" uid="uid://c4nerohs38i5u" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_3/cena/barreira_inimigo_3.tscn" id="8_hwsk3"]
 [ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="9_8i86y"]
+[ext_resource type="PackedScene" uid="uid://rgb3wotabff3" path="res://cenas_sprites/barreira_iniciar_a_luta/barreira.tscn" id="9_f8ka1"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="10_64n2j"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="11_3k3tp"]
 
@@ -794,17 +795,16 @@ centered = false
 [node name="Inimigo 3" parent="inimigo" unique_id=476643638 instance=ExtResource("7_a10m6")]
 light_mask = 5
 visibility_layer = 3
-position = Vector2(2631, 23)
+position = Vector2(2568, 24)
 
 [node name="barreira_inimigo_3" parent="inimigo" unique_id=1700755831 instance=ExtResource("8_hwsk3")]
 light_mask = 2
 visibility_layer = 5
-position = Vector2(2328, 48)
+position = Vector2(2256, 48)
 
-[node name="barreira_inimigo_4" parent="inimigo" unique_id=357571488 instance=ExtResource("8_hwsk3")]
-light_mask = 2
-visibility_layer = 5
-position = Vector2(2928, 48)
+[node name="Area2D" parent="inimigo" unique_id=1455828158 node_paths=PackedStringArray("boss_da_fase") instance=ExtResource("9_f8ka1")]
+position = Vector2(2936, 40)
+boss_da_fase = NodePath("../Inimigo 3")
 
 [node name="checkpoint" type="Node2D" parent="." unique_id=403741912]
 
