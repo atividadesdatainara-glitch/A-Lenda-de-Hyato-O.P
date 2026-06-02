@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://cqwfcvfek5qmx" path="res://assets/parallax/DarkForest_Middleground.png" id="10_wmstr"]
 [ext_resource type="Texture2D" uid="uid://bqwvqhf4m1vbc" path="res://assets/parallax/DarkForest_Shadow.png" id="11_pytas"]
 [ext_resource type="Texture2D" uid="uid://cfexg7rs4bxcd" path="res://assets/parallax/DarkForest_Foreground.png" id="12_b5xiu"]
-[ext_resource type="Script" uid="uid://bcwp7chlx2oge" path="res://scripts/bareira/barreira.gd" id="13_2gj53"]
 [ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="13_u0e5j"]
 [ext_resource type="PackedScene" uid="uid://c06bvxg64i2n0" path="res://cenas_sprites/inimigo_1/cena/inimigo_1.tscn" id="14_y1p22"]
 [ext_resource type="PackedScene" uid="uid://cw1t8drw2uwpy" path="res://cenas_sprites/barreira_iniciar_a_luta/inimigo_1/cena/barreira_inimigo_1.tscn" id="15_2tspm"]
@@ -1128,7 +1127,6 @@ position = Vector2(1920, -88)
 
 [node name="inimigo" type="Node2D" parent="." unique_id=175510761]
 position = Vector2(1842, -89)
-script = ExtResource("13_2gj53")
 
 [node name="Inimigo 1" parent="inimigo" unique_id=2142985082 instance=ExtResource("14_y1p22")]
 visibility_layer = 5
@@ -1156,4 +1154,4 @@ room_position = Vector2(-300, 0)
 room_size = Vector2(3640, 1080)
 
 [node name="Player" parent="player_camera" unique_id=2051129159 groups=["Player"] instance=ExtResource("8_v2nww")]
-position = Vector2(75, 3)
+position = Vector2(-1605, 163)
