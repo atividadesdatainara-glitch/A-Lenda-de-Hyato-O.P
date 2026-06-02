@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://j4o02rt5naps" path="res://cenas_sprites/checkpoint/script/checkpoint.gd" id="1_10xhx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxve1"]
-size = Vector2(41, 109)
+size = Vector2(83.5, 120.5)
 
 [node name="Checkpoint" type="Area2D" unique_id=604722356]
 collision_layer = 0
 script = ExtResource("1_10xhx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606121939]
-position = Vector2(1, -46)
+position = Vector2(22.25, -51.75)
 shape = SubResource("RectangleShape2D_rxve1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

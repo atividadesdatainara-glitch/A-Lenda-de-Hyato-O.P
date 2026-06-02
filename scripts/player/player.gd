@@ -92,7 +92,7 @@ func executar_dash():
 	
 	# Chama a animação da barra: 0.2s esvaziando e 1.0s recarregando
 	if dashbar:
-		dashbar.iniciar_cooldown(0.2, 1.0)
+		dashbar.iniciar_cooldown(0.2, 0.5)
 	
 	sprite.modulate.a = 0.5
 	if sprite.sprite_frames.has_animation("dash"):
@@ -180,7 +180,7 @@ func espera_frame_player(frame_alvo, anim_atual):
 func levar_dano_do_inimigo():
 	if player_is_dead or is_dashing or is_taking_damage: return
 	
-	player_health -= 1
+	player_health -= 4
 	barra.atualizar_barra(player_health, 10)
 	
 	is_taking_damage = true 

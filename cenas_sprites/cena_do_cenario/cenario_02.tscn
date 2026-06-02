@@ -819,7 +819,7 @@ centered = false
 [node name="goal" type="Node2D" parent="." unique_id=2000270528]
 
 [node name="goal-2" parent="goal" unique_id=492563005 instance=ExtResource("12_bitk3")]
-position = Vector2(2272, 48)
+position = Vector2(2264, 48)
 next_level = "res://cenas_sprites/cena_do_cenario/cenario_03.tscn"
 
 [node name="transition" type="CanvasLayer" parent="goal" unique_id=23768351 groups=["Player", "player"]]

@@ -11,7 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://btmpmh0u5nxy8" path="res://cenas_sprites/checkpoint/cena/checkpoint.tscn" id="9_8i86y"]
 [ext_resource type="PackedScene" uid="uid://rgb3wotabff3" path="res://cenas_sprites/barreira_iniciar_a_luta/barreira.tscn" id="9_f8ka1"]
 [ext_resource type="PackedScene" uid="uid://cglnobl01dygm" path="res://cenas_sprites/cena_da_camera/camera.tscn" id="10_64n2j"]
+[ext_resource type="PackedScene" uid="uid://y22sf7o554p3" path="res://cenas_sprites/goal/goal-3.tscn" id="10_dvxue"]
 [ext_resource type="PackedScene" uid="uid://ftnqjfg5f8fo" path="res://cenas_sprites/player/cenas/player.tscn" id="11_3k3tp"]
+[ext_resource type="Script" uid="uid://c5lxuii1aacdi" path="res://scripts/goal/transition.gd" id="11_6y1r6"]
+[ext_resource type="Shader" uid="uid://brit2vnofwe8b" path="res://shaders/transicao.gdshader" id="12_a10m6"]
+[ext_resource type="Script" uid="uid://b3j5hkom75ski" path="res://scripts/goal/color_rect.gd" id="13_hwsk3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhp3d"]
 texture = ExtResource("1_6vlba")
@@ -701,6 +705,13 @@ texture = ExtResource("1_6vlba")
 [sub_resource type="TileSet" id="TileSet_mekdg"]
 sources/0 = SubResource("TileSetAtlasSource_b1fgo")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y1r6"]
+shader = ExtResource("12_a10m6")
+shader_parameter/lines = 10.0
+shader_parameter/threshold = 0.0
+shader_parameter/line_color_a = Color(1, 1, 1, 1)
+shader_parameter/line_color_b = Color(0, 0, 0, 1)
+
 [node name="cenario_3" type="Node2D" unique_id=1194876381]
 
 [node name="tile_map" type="Node2D" parent="." unique_id=617882262]
@@ -719,7 +730,7 @@ tile_set = SubResource("TileSet_qs03k")
 [node name="plataforma" type="TileMapLayer" parent="tile_map/chao" unique_id=331891538]
 position = Vector2(224, 0)
 scale = Vector2(0.75, 0.75)
-tile_map_data = PackedByteArray("AABgAAEAAAABAAwAAABhAAEAAAACAAwAAABiAAEAAAADAAwAAAD8/wAAAAABAAwAAAD9/wAAAAACAAwAAAD+/wAAAAACAAwAAQD//wAAAAADAAwAAQAPAAcAAAABAAwAAAAQAAcAAAACAAwAAAARAAcAAAADAAwAAAAfAAoAAAABAAwAAAAgAAoAAAACAAwAAAAhAAoAAAACAAwAAQAiAAoAAAADAAwAAQApAAgAAAABAAwAAAAqAAgAAAACAAwAAAArAAgAAAADAAwAAAAoAAEAAAABAAwAAAApAAEAAAACAAwAAAAqAAEAAAADAAwAAAA0AAUAAAABAAwAAAA1AAUAAAACAAwAAAA2AAUAAAACAAwAAQA3AAUAAAADAAwAAQAuAPz/AAABAAwAAAAvAPz/AAACAAwAAAAwAPz/AAADAAwAAAAfAP//AAABAAwAAAAgAP//AAACAAwAAAAhAP//AAADAAwAAAA7APr/AAABAAwAAAA8APr/AAACAAwAAAA9APr/AAACAAwAAQA+APr/AAADAAwAAQA9AAcAAAABAAwAAAA+AAcAAAACAAwAAAA/AAcAAAACAAwAAQBAAAcAAAADAAwAAQBsAP7/AAABAAwAAABtAP7/AAACAAwAAABuAP7/AAACAAwAAQBvAP7/AAADAAwAAQB4AAgAAAABAAwAAAB5AAgAAAACAAwAAAB6AAgAAAADAAwAAACCAAUAAAABAAwAAACDAAUAAAACAAwAAACEAAUAAAACAAwAAQCFAAUAAAADAAwAAQCKAAkAAAABAAwAAACLAAkAAAACAAwAAACMAAkAAAADAAwAAACWAAcAAAABAAwAAACXAAcAAAACAAwAAACYAAcAAAADAAwAAAA=")
+tile_map_data = PackedByteArray("AABgAAEAAAABAAwAAABhAAEAAAACAAwAAABiAAEAAAADAAwAAAD8/wAAAAABAAwAAAD9/wAAAAACAAwAAAD+/wAAAAACAAwAAQD//wAAAAADAAwAAQAPAAcAAAABAAwAAAAQAAcAAAACAAwAAAARAAcAAAADAAwAAAAfAAoAAAABAAwAAAAgAAoAAAACAAwAAAAhAAoAAAACAAwAAQAiAAoAAAADAAwAAQApAAgAAAABAAwAAAAqAAgAAAACAAwAAAArAAgAAAADAAwAAAAoAAEAAAABAAwAAAApAAEAAAACAAwAAAAqAAEAAAADAAwAAAA0AAUAAAABAAwAAAA1AAUAAAACAAwAAAA2AAUAAAACAAwAAQA3AAUAAAADAAwAAQAuAPz/AAABAAwAAAAvAPz/AAACAAwAAAAwAPz/AAADAAwAAAAfAP//AAABAAwAAAAgAP//AAACAAwAAAAhAP//AAADAAwAAAA7APr/AAABAAwAAAA8APr/AAACAAwAAAA9APr/AAACAAwAAQA+APr/AAADAAwAAQA9AAcAAAABAAwAAAA+AAcAAAACAAwAAAA/AAcAAAACAAwAAQBAAAcAAAADAAwAAQBsAP7/AAABAAwAAABtAP7/AAACAAwAAABuAP7/AAACAAwAAQBvAP7/AAADAAwAAQB4AAgAAAABAAwAAAB5AAgAAAACAAwAAAB6AAgAAAADAAwAAACCAAUAAAABAAwAAACDAAUAAAACAAwAAACEAAUAAAACAAwAAQCFAAUAAAADAAwAAQCKAAkAAAABAAwAAACLAAkAAAACAAwAAACMAAkAAAADAAwAAACWAAcAAAABAAwAAACXAAcAAAACAAwAAACYAAcAAAADAAwAAADwAP//AAACAAgAAADxAP//AAACAAgAAADyAP//AAACAAgAAADvAP//AAACAAgAAADuAP//AAACAAgAAADtAP//AAABAAgAAADtAAAAAAABAAkAAADmAAMAAAABAAwAAADnAAMAAAACAAwAAADoAAMAAAADAAwAAADqAAEAAAABAAwAAADrAAEAAAACAAwAAADsAAEAAAADAAwAAADtAAEAAAABAAkAAAA=")
 tile_set = SubResource("TileSet_2re1u")
 
 [node name="arvores" type="TileMapLayer" parent="tile_map" unique_id=1116201557]
@@ -806,10 +817,31 @@ position = Vector2(2256, 48)
 position = Vector2(2936, 40)
 boss_da_fase = NodePath("../Inimigo 3")
 
+[node name="goal-2" parent="inimigo" unique_id=492563005 instance=ExtResource("10_dvxue")]
+position = Vector2(3112, -24)
+next_level = "res://cenas_sprites/creditos/creditos_finais.tscn"
+
+[node name="transition" type="CanvasLayer" parent="inimigo" unique_id=1201495064 groups=["Player", "player"]]
+script = ExtResource("11_6y1r6")
+
+[node name="color_rect" type="ColorRect" parent="inimigo/transition" unique_id=1734154544]
+material = SubResource("ShaderMaterial_6y1r6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("13_hwsk3")
+metadata/_edit_use_anchors_ = true
+
 [node name="checkpoint" type="Node2D" parent="." unique_id=403741912]
 
 [node name="Checkpoint" parent="checkpoint" unique_id=604722356 instance=ExtResource("9_8i86y")]
 position = Vector2(2177, 40)
+
+[node name="Checkpoint" parent="checkpoint/Checkpoint" unique_id=1453762652 instance=ExtResource("9_8i86y")]
+position = Vector2(-985, -64)
 
 [node name="player_camera" type="Node2D" parent="." unique_id=1449572871]
 position = Vector2(2177, 40)
@@ -817,7 +849,7 @@ position = Vector2(2177, 40)
 [node name="camera" parent="player_camera" unique_id=487859855 node_paths=PackedStringArray("player") instance=ExtResource("10_64n2j")]
 position = Vector2(-2169, -40)
 limit_top = -239
-limit_right = 3072
+limit_right = 3152
 limit_bottom = 129
 player = NodePath("../Player")
 room_position = Vector2(-300, 0)

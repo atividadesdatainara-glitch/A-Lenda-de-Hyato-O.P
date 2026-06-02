@@ -1098,7 +1098,10 @@ texture = ExtResource("12_b5xiu")
 centered = false
 
 [node name="goal" type="Node2D" parent="." unique_id=1635614155]
-visible = false
+
+[node name="goal-1" parent="goal" unique_id=492563005 instance=ExtResource("7_f45k0")]
+position = Vector2(2648, -96)
+next_level = "res://cenas_sprites/cena_do_cenario/cenario_02.tscn"
 
 [node name="transition" type="CanvasLayer" parent="goal" unique_id=2120883008 groups=["Player", "player"]]
 script = ExtResource("4_57ady")
@@ -1115,10 +1118,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("6_w77w8")
 metadata/_edit_use_anchors_ = true
-
-[node name="goal-1" parent="goal" unique_id=492563005 instance=ExtResource("7_f45k0")]
-position = Vector2(2688, -96)
-next_level = "res://cenas_sprites/cena_do_cenario/cenario_02.tscn"
 
 [node name="checkpoint" type="Node2D" parent="." unique_id=2106476608]
 
