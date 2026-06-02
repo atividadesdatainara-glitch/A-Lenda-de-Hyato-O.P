@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c6sar7xugggkr"]
+
+[ext_resource type="Script" uid="uid://dy50ovn1elj16" path="res://scripts/goal/final/transition_final.gd" id="1_vxe3e"]
+[ext_resource type="Script" uid="uid://duvm8h3bktoqm" path="res://scripts/goal/final/color_rect.gd" id="2_0eaww"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw4pe"]
+
+[node name="Control" type="Control" unique_id=788791865]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="transition" type="CanvasLayer" parent="." unique_id=1803492699 groups=["Player", "player"]]
+script = ExtResource("1_vxe3e")
+
+[node name="color_rect" type="ColorRect" parent="transition" unique_id=2083846720]
+material = SubResource("ShaderMaterial_fw4pe")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_0eaww")
+metadata/_edit_use_anchors_ = true

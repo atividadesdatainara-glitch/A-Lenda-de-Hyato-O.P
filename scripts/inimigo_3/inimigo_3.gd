@@ -424,7 +424,7 @@ func espera_frame_especifico(frame_alvo):
 
 func executar_ataque_boss():
 	_preparar_ataque()
-	await get_tree().create_timer(randf_range(0.08, 0.18)).timeout
+	await get_tree().create_timer(randf_range(0.05, 0.18)).timeout
 	sprite.play("attack1")
 	sprite.frame = 0
 	await espera_frame_especifico(4)
@@ -794,6 +794,12 @@ func morrer():
 func resetar_boss():
 	# Reseta os status principais
 	health = 10
+	
+	# ADICIONE ESTA LINHA AQUI: Atualiza o visual da barra para 100% (10 de 10)
+	if has_node("lifebar") and barra:
+		barra.atualizar_barra(health, 10)
+	# Reseta os status principais
+
 	is_dead = false
 	is_attacking = false
 	is_taking_damage = false

@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bpi1aoxtbwiry"]
+
+[ext_resource type="Script" uid="uid://vibwmif3m2cg" path="res://cenas_sprites/creditos/creditos_finais.gd" id="1_twts8"]
+[ext_resource type="Texture2D" uid="uid://bsxbsbkje77rk" path="res://assets/menu/3 background/orig_big.png" id="2_ghsgy"]
+[ext_resource type="PackedScene" uid="uid://deq014sfgnksy" path="res://assets/menu/title_screen.tscn" id="2_ueah5"]
+[ext_resource type="FontFile" uid="uid://g21csg01lt34" path="res://assets/menu/fonte/Jacquard_12,Micro_5,Pixelify_Sans (2)/Micro_5/Micro5-Regular.ttf" id="3_5yk8e"]
+
+[sub_resource type="Theme" id="Theme_ueah5"]
+
+[node name="Creditos_finais" type="Control" unique_id=650236519]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_twts8")
+cena_do_menu = ExtResource("2_ueah5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=510493879]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ueah5")
+texture = ExtResource("2_ghsgy")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=620379712]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 642.0
+offset_right = 1333.0
+offset_bottom = 2748.0
+theme_override_fonts/font = ExtResource("3_5yk8e")
+theme_override_font_sizes/font_size = 33
+text = "DESENVOLVIMENTO PRINCIPAL
+
+Programação e Design de Nível:
+Kauã Melo & Tainara Oliveira
+
+Construção de Cenários:
+Tainara Oliveira
+
+Animações (Player e Chefes):
+Kauã Melo
+
+Documentação do Projeto:
+Sthefanny Ribeiro
+
+AGRADECIMENTOS ESPECIAIS
+Um agradecimento especial aos nossos amigos que, mesmo não 
+fazendo parte da equipe de desenvolvimento, contribuíram e apoiaram este projeto:
+
+Matheus
+João Pedro
+Guilherme
+
+EQUIPE DO PROJETO
+Kauã Melo
+Tainara Oliveira
+Sthefanny Ribeiro
+Adriel Teixeira
+Eduardo Cavalcante
+Pedro Riquelme Uchoa
+
+INSPIRAÇÕES
+Este jogo foi desenvolvido com inspiração em grandes 
+clássicos dos gêneros Metroidvania e Ação:
+
+Hollow Knight
+Mega Man Zero
+Castlevania
+
+OBRIGADO POR JOGAR!
+
+Você concluiu a jornada e ajudou Hyato a alcançar sua vingança.
+
+Obrigado por fazer parte desta aventura!
+
+Desenvolvido na Godot Engine
+Projeto acadêmico desenvolvido para o curso de Análise e Desenvolvimento de Sistemas
+"
+horizontal_alignment = 1
