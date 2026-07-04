@@ -60,11 +60,6 @@ text = "    START   "
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_p1kha")
 
-[node name="credits_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2" unique_id=867713113]
-layout_mode = 2
-theme = ExtResource("3_p1kha")
-text = "CREDITS"
-
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2" unique_id=839965143]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_p1kha")
@@ -78,5 +73,4 @@ text = "QUIT GAME"
 layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/start_btn" to="." method="_on_start_btn_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/credits_btn" to="." method="_on_credits_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/quit_btn" to="." method="_on_quit_btn_pressed"]
